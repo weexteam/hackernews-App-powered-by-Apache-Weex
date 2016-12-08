@@ -1,0 +1,17 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.0'
+#inhibit_all_warnings!
+
+def common
+    pod 'WeexSDK', :path=>'./WeexSDK/'
+    pod 'SDWebImage', '3.7.5'
+    pod 'SocketRocket', '0.4.2'
+end
+
+target 'HackerNews' do
+    common
+end
+
+target 'HackerNewsUITests' do
+    common
+end
