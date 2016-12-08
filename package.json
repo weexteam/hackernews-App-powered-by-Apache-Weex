@@ -18,6 +18,9 @@
     "build": "npm run build:web && npm run build:weex",
     "dev:weex": "webpack --watch --config build/webpack.weex.config.js",
     "dev:web": "webpack --watch --config build/webpack.web.config.js",
+    "copy:android": "cp dist/index.weex.js android/app/src/main/assets/index.js",
+    "copy:ios": "cp dist/index.weex.js ios/assets/index.js",
+    "copy": "npm run copy:android && npm run copy:ios",
     "serve": "serve -p 1337",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
