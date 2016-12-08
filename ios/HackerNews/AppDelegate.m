@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDefine.h"
+#import "ViewController.h"
+#import "WXImgLoaderDefaultImpl.h"
+
+#import <WeexSDK/WeexSDK.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +21,27 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    //not necessary
+    [WXAppConfiguration setAppGroup:@"Weex"];
+    [WXAppConfiguration setAppName:@"HackerNews"];
+    [WXAppConfiguration setAppVersion:@"0.0.1"];
+    
+    //init SDK environment
+    [WXSDKEngine initSDKEnviroment];
+    
+    //set log
+    [WXLog setLogLevel:WXLogLevelLog];
+    
+    [WXSDKEngine registerModule:@"event" withClass:NSClassFromString(@"WXEventModule")];
+
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    ViewController * viewController = [[ViewController alloc] init];
+    viewController.url = [NSURL URLWithString:HOME_URL];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
