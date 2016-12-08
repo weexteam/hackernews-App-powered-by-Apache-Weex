@@ -25,5 +25,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.alibaba:fastjson:1.1.46.android'
+    compile project(':weex_sdk')
     testCompile 'junit:junit:4.12'
 }
