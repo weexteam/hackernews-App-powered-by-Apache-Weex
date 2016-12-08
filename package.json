@@ -13,11 +13,27 @@
     "ios"
   ],
   "scripts": {
+    "build:web": "webpack --config build/webpack.web.config.js",
+    "build:weex": "webpack --config build/webpack.weex.config.js",
+    "build": "npm run build:web && npm run build:weex",
+    "dev:weex": "webpack --watch --config build/webpack.weex.config.js",
+    "dev:web": "webpack --watch --config build/webpack.web.config.js",
+    "serve": "serve -p 1337",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
     "node": ">=4.0"
   },
   "author": "Hanks <zhanghan.me@gmail.com>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "buble": "^0.14.2",
+    "buble-loader": "^0.3.2",
+    "css-loader": "^0.26.1",
+    "serve": "^1.4.0",
+    "vue-loader": "^10.0.2",
+    "vue-template-compiler": "^2.1.4",
+    "webpack": "^1.14.0",
+    "weex-vue-loader": "^0.2.0"
+  }
 }
