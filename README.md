@@ -1,69 +1,57 @@
 # Hacker News App
 
-首个使用 Weex 和 Vue 开发的原生应用。
+[中文版说明文档](./README.zh.md)
 
-## 编译项目文件
+A mobile app for [Hacker News](https://news.ycombinator.com/), which is powered by Weex and Vue.
 
-安装依赖：
+## Compile
+
+Install the dependencies:
 
 ```
 npm install
 ```
 
-编译代码：
+Compile the source code:
 
-```bash
-# 生成 Web 平台可用的 bundle 文件
-# 位置： dist/index.web.js
-npm run build:web
++ `npm run build:web` # Compile the source code for web platform.
++ `npm run build:weex` # Compile the source code for Android and iOS platform.
++ `npm run build` # Run both `build:web` and `build:weex`.
 
-# 生成 Andriod 和 iOS 平台可用的 bundle 文件
-# 位置： dist/index.web.js
-npm run build:weex
+Copy the bundle file:
 
-# run both build:web and build:web
-npm run build
-```
++ `npm run copy:android` # Copy generated bundle file to the assets of Android project.
++ `npm run copy:ios` # Copy generated bundle file to the assets of iOS project.
++ `npm run copy` # Run both `copy:andriod` and `copy:ios`.
 
-拷贝 bundle 文件：
+More npm scripts will be find in the `package.json`.
 
-```bash
-# 将生成的 bundle 文件拷贝到 iOS 项目的资源目录
-npm run copy:android
-
-# 将生成的 bundle 文件拷贝到 Android 项目的资源目录
-npm run copy:ios
-
-# run both copy:andriod and copy:ios
-npm run copy
-```
-
-### 启动 Web 服务
+### Start Web Service
 
 ```
 npm run serve
 ```
 
-启动服务后会监听 1337 端口，访问 http://127.0.0.1:1337/index.html 即可在浏览器中预览页面。
+The server is listening on 1337. Visit http://127.0.0.1:1337/index.html can preview the app on browser.
 
- > 注： 当前 index.html 的例子中使用的是 Weex 内置的 web 渲染器渲染页面，还未使用 Vue。
+ > NOTE: Currently the vue renderer is not ready, the web page isn't rendering by Vue components.
 
-### 启动 Android 项目
+### Run The Android Project
 
-首先应该安装 [Android Studio](https://developer.android.com/studio/index.html) 和必要的 Android SDK，配置好基本的开发环境。
+First you should install [Android Studio](https://developer.android.com/studio/index.html) and Android SDK.
 
-使用 Android Studio 打开 `android` 目录中的项目，等待自动安装完依赖以后，即可启动模拟器或者真机预览页面。
+Assuming you have configured the Android development environment properly, just use Android Studio to open the project in the `android` folder, and run the app as other normal Android projects.
 
-### 启动 iOS 项目
+### Run The iOS Project
 
-首先应该配置好 [iOS 开发环境](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppStoreDistributionTutorial/Setup/Setup.html) 并且安装 [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) 工具。
+First you should [setup the iOS develop environment](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppStoreDistributionTutorial/Setup/Setup.html) and install the [CocoaPods](https://guides.cocoapods.org/using/getting-started.html).
 
-进入 `ios` 目录，使用 CocoaPods 安装依赖：
+Enter the `ios` path, use CocoaPods to install dependencies:
 
 ```
 pod install
 ```
 
-使用 Xcode 打开 `ios` 目录中的项目（`HackerNews.xcworkspace`），然后即可启动模拟器预览页面。
+Open the project in the `ios` folder by Xcode, you could run the app on the simulator.
 
- > 注：如果想要在真机上查看效果，还需要配置开发者签名等信息。
+ > NOTE: If you want to run the app on real device, you also need to setup your own signing configuration.
