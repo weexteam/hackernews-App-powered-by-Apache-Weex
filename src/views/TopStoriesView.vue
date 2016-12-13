@@ -1,10 +1,11 @@
 <template>
-  <story-list :stories="topStories"></story-list>
+  <story-list :stories="topStories" @loadmore="loadMoreStories"></story-list>
 </template>
 
 <script>
-  const { getStories } = require('../store/api')
-  const STORY_COUNT = 10
+  const { fetchIdsByType, fetchItems } = require('../store/api')
+  const INITIAL_STORY_COUNT = 10
+  const FRAME_COUNT = 6
 
   module.exports = {
     components: {
@@ -18,17 +19,25 @@
     },
 
     methods: {
-      formatStories (stories) {
-        // TODO: pick and omit properties
-        return stories
+      appendStories (ids) {
+        return fetchItems(ids).then(items => {
+          this.topStories = this.topStories.concat(items)
+        })
+      },
+      loadMoreStories () {
+        console.log('will load more stories.')
+        if (this._storiesIds) {
+          const start = this.topStories.length
+          this.appendStories(this._storiesIds.slice(start, start + FRAME_COUNT))
+        }
       }
     },
 
     created () {
       // console.log('top-stories created')
-      getStories('top', STORY_COUNT).then(items => {
-        // console.log(items)
-        this.topStories = this.formatStories(items)
+      fetchIdsByType('top').then(ids => {
+        this._storiesIds = ids
+        this.appendStories(ids.slice(0, INITIAL_STORY_COUNT))
       })
     }
   }

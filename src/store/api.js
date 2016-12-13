@@ -43,11 +43,3 @@ export function fetchItems (ids) {
 export function fetchUser (id) {
   return fetch(`user/${id}`)
 }
-
-export function getStories (type, limit = 30) {
-  return new Promise((resolve, reject) => {
-    fetchIdsByType(type).then(ids => {
-      fetchItems(ids.slice(0, limit)).then(resolve)
-    })
-  })
-}

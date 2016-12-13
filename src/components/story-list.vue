@@ -1,5 +1,5 @@
 <template>
-  <list class="story-list">
+  <list class="story-list" @loadmore="$emit('loadmore')">
     <cell class="story-cell" v-for="story in stories">
       <text class="story-score">{{story.score}}</text>
       <a class="story-link" :href="story.url">
