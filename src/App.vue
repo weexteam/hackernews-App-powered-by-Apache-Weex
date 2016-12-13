@@ -1,12 +1,23 @@
 <template>
-  <div class="wrapper">
+  <top-stories class="wrapper">
     <text class="title">Hello Weex</text>
-  </div>
+  </top-stories>
 </template>
+
+<script>
+  const TopStoriesView = require('./views/TopStoriesView.vue')
+
+  module.exports = {
+    components: {
+      'top-stories': TopStoriesView
+    }
+  }
+</script>
 
 <style>
   .wrapper {
     background-color: #F5F5F5;
+    height: 100%;
   }
   .title {
     font-size: 80px;

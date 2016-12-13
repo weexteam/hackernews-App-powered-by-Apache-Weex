@@ -30,8 +30,7 @@
   "author": "Hanks <zhanghan.me@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "firebase": "^3.6.3",
-    "vue": "^2.1.5"
+    "firebase": "^3.6.3"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",
