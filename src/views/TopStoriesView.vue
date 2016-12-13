@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  const { fetchIdsByType, fetchItems } = require('../store/api')
+  const { fetchIdsByType, fetchItems } = require('../store/mock/api')
   const INITIAL_STORY_COUNT = 10
   const FRAME_COUNT = 6
 
@@ -26,7 +26,6 @@
       appendStories (ids) {
         return fetchItems(ids).then(items => {
           this.topStories = this.topStories.concat(items)
-          console.log(JSON.stringify(this.topStories))
         })
       },
       loadMoreStories () {
@@ -42,7 +41,7 @@
       // console.log('top-stories created')
       fetchIdsByType('top').then(ids => {
         this._storiesIds = ids
-        console.log(ids)
+        // console.log(ids)
         this.appendStories(ids.slice(0, INITIAL_STORY_COUNT))
       })
     }
