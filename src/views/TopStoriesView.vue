@@ -1,5 +1,8 @@
 <template>
-  <story-list :stories="topStories" @loadmore="loadMoreStories"></story-list>
+  <div class="top-stories">
+    <app-header></app-header>
+    <story-list :stories="topStories" @loadmore="loadMoreStories"></story-list>
+  </div>
 </template>
 
 <script>
@@ -9,7 +12,8 @@
 
   module.exports = {
     components: {
-      'story-list': require('../components/story-list.vue')
+      'story-list': require('../components/story-list.vue'),
+      'app-header': require('../components/app-header.vue')
     },
 
     data () {
@@ -22,6 +26,7 @@
       appendStories (ids) {
         return fetchItems(ids).then(items => {
           this.topStories = this.topStories.concat(items)
+          console.log(JSON.stringify(this.topStories))
         })
       },
       loadMoreStories () {
@@ -37,8 +42,15 @@
       // console.log('top-stories created')
       fetchIdsByType('top').then(ids => {
         this._storiesIds = ids
+        console.log(ids)
         this.appendStories(ids.slice(0, INITIAL_STORY_COUNT))
       })
     }
   }
 </script>
+
+<style>
+  .top-stories {
+    /**/
+  }
+</style>
