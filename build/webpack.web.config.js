@@ -12,11 +12,8 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'buble-loader',
-        exclude: /node_modules/,
-        options: {
-          objectAssign: 'Object.assign'
-        }
+        loaders: ['babel-loader'],
+        exclude: /node_modules/
       }, {
         test: /\.vue(\?[^?]+)?$/,
         loaders: ['vue-loader']
