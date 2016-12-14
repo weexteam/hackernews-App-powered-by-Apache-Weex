@@ -1,0 +1,247 @@
+* {
+  color: initial;
+  cursor: initial;
+  direction: initial;
+  font: initial;
+  /*font-family: initial;*/
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: initial;
+  font-style: initial;
+  font-variant: initial;
+  font-weight: initial;
+  line-height: initial;
+  text-align: initial;
+  text-indent: initial;
+  visibility: initial;
+  white-space: initial;
+  word-spacing: initial;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+          text-size-adjust: none;
+}
+
+html {
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+a,
+button,
+[role="button"],
+input,
+label,
+select,
+textarea {
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+}
+
+p, ol, ul, dl {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+figure {
+  margin: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+a, .weex-a {
+  display: block;
+  text-decoration: none;
+}
+
+div, .weex-div, .weex-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  box-align: stretch;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
+}
+
+figure, img, .weex-image, .weex-img {
+  display: block;
+  background-repeat: no-repeat;
+}
+
+.weex-list-wrapper {
+  overflow: scroll;
+}
+
+.weex-list-top-mark {
+  width: 100%;
+  height: 0;
+  visibility: hidden;
+}
+
+.weex-list-bottom-mark {
+  width: 100%;
+  height: 0;
+  visibility: hidden;
+}
+
+.weex-scroller-wrapper {
+  overflow: scroll;
+}
+
+.weex-scroller-top-mark {
+  width: 100%;
+  height: 0;
+  visibility: hidden;
+}
+
+.weex-scroller-bottom-mark {
+  width: 100%;
+  height: 0;
+  visibility: hidden;
+}
+
+.weex-slider-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.weex-slider-inner {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.weex-slider-cell {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.weex-indicator {
+  position: absolute;
+  right: 30px;
+  bottom: 10px;
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.weex-indicator-item {
+  display: inline-block;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #BBBBBB;
+}
+.weex-indicator-item + .weex-indicator-item {
+  margin-left: 10px;
+}
+
+.weex-indicator-item-active {
+  background-color: blue;
+}
+
+.weex-switch {
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  box-sizing: content-box;
+  background-clip: content-box;
+  color: #64bd63;
+  width: 100px;
+  height: 60px;
+  background-color: white;
+  border-color: #dfdfdf;
+  box-shadow: #dfdfdf 0px 0px 0px 0px inset;
+  border-radius: 60px;
+  -webkit-transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
+          transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
+}
+
+.weex-switch-checked {
+  background-color: #64bd63;
+  border-color: #64bd63;
+  box-shadow: #64bd63 0px 0px 0px 40px inset;
+}
+
+.weex-switch-disabled {
+  background-color: #EEEEEE;
+}
+
+.weex-switch-inner {
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: background-color 0.4s, left 0.2s;
+          transition: background-color 0.4s, left 0.2s;
+}
+
+.weex-switch-checked > .weex-switch-inner {
+  left: 40px;
+}
+
+p, .weex-text {
+  white-space: pre-wrap;
+  font-size: 32px;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: visible;
+}
+
+textarea, .weex-textarea {
+  font-size: 32px;
+}
+
+.weex-web {
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=index.css.map */

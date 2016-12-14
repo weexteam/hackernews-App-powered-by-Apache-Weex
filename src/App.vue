@@ -1,12 +1,29 @@
 <template>
-  <div class="wrapper">
-    <text class="title">Hello Weex</text>
-  </div>
+  <!-- <div> -->
+    <top-stories class="wrapper"></top-stories>
+    <!-- <comment-view class="wrapper" story-id="12922141"></comment-view> -->
+    <!-- <user-view user-id="Hanks10100"></user-view> -->
+  <!-- </div> -->
 </template>
+
+<script>
+  const TopStoriesView = require('./views/TopStoriesView.vue')
+  const CommentView = require('./views/CommentView.vue')
+  const UserView = require('./views/UserView.vue')
+
+  module.exports = {
+    components: {
+      'top-stories': TopStoriesView,
+      'comment-view': CommentView,
+      'user-view': UserView
+    }
+  }
+</script>
 
 <style>
   .wrapper {
     background-color: #F5F5F5;
+    height: 100%;
   }
   .title {
     font-size: 80px;
