@@ -5,7 +5,7 @@
       <story-item class="comment-story" :story="story"></story-item>
     </div>
     <div class="comments-box" v-if="comments">
-      <text class="comments-count">{{comments.length}} comments</text>
+      <text class="comment-count">{{comments.length}} comments</text>
       <list class="comment-list">
         <cell class="comment-cell" v-for="comment in comments">
           <comment-item :comment="comment"></comment-item>
@@ -15,8 +15,39 @@
   </div>
 </template>
 
+<style>
+  .comments-box {
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    /*padding-top: 20px;*/
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .comment-count {
+    font-size: 36px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* padding-left: 20px; */
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #EEEEEE;
+    margin-bottom: 30px;
+  }
+</style>
+
 <script>
   const { fetchItems, fetchItem } = require('../store/api')
+
+  // function fetchComments (comment) {
+  //   // console.log(comment.kids)
+  //   if (comment && comment.kids) {
+  //     return fetchItems(comment.kids).then(items => {
+  //       // console.log(items)
+  //       comment.replys = items
+  //       fetchComments(comment.replys)
+  //     })
+  //   }
+  // }
 
   module.exports = {
     components: {
@@ -51,8 +82,9 @@
 
       getComments (ids) {
         return fetchItems(ids).then(comments => {
-          console.log(comments)
+          // console.log(comments)
           this.comments = comments
+          // comments.forEach(fetchComments)
         })
       }
     },
