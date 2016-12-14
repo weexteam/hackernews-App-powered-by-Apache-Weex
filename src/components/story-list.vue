@@ -4,10 +4,11 @@
       <text class="story-score">{{story.score}}</text>
       <a class="story-link" :href="story.url">
         <text class="story-title">{{story.title}}</text>
+        <text class="small-text story-host">({{ story.url | host }})</text>
       </a>
       <div class="story-meta">
         <text class="small-text story-by">{{story.by}}</text>
-        <text class="small-text story-time">{{story.time}}</text>
+        <text class="small-text story-time">{{ story.time | timeAgo }} ago</text>
         <text class="small-text story-comment">{{story.comment}}</text>
       </div>
     </cell>

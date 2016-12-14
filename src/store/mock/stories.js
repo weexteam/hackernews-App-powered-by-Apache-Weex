@@ -157,16 +157,6 @@ module.exports = [{
     "type": "story",
     "url": "https://discord.engineering/how-discord-handles-push-request-bursts-of-over-a-million-per-minute-with-elixirs-genstage-8f899f0221b4#.lb9vf1xt5"
 }, {
-    "by": "changeseeker",
-    "descendants": 114,
-    "id": 13163367,
-    "kids": [13165043, 13165504, 13163824, 13164065, 13164113, 13166264, 13165412, 13165368, 13163801, 13164313, 13164132, 13163867, 13163848, 13163814, 13164509, 13164992, 13166055, 13165998, 13164756, 13165171, 13165411, 13165522, 13166098, 13164129, 13163802, 13165367, 13164504, 13164106, 13164059, 13164037, 13163915, 13163885, 13164424, 13164719, 13164779],
-    "score": 195,
-    "text": "Please be as specific as possible. Also please mention your company and&#x2F;or industry.<p>This should help folks trying to get into your company&#x2F;industry on what they need to know and conversely help you in finding a better pool of candidates.",
-    "time": 1481588086,
-    "title": "Ask HN: Hiring managers, what tech skills will you be hiring for in 2017?",
-    "type": "story"
-}, {
     "by": "devinp",
     "descendants": 10,
     "id": 13163585,
@@ -386,15 +376,6 @@ module.exports = [{
     "title": "Telomeres – Too much of a good thing?",
     "type": "story",
     "url": "http://joshmitteldorf.scienceblog.com/2016/12/12/telomeres-too-much-of-a-good-thing/"
-}, {
-    "by": "mkrecny",
-    "descendants": 173,
-    "id": 13159908,
-    "kids": [13160572, 13160122, 13160664, 13160544, 13161222, 13160120, 13161739, 13160327, 13161406, 13161775, 13160871, 13160733, 13160163, 13161433, 13160142, 13160267, 13160796, 13164072, 13161267, 13162497, 13162453, 13160239, 13160497, 13161546, 13160511, 13165262, 13160196, 13160202, 13161846, 13160234, 13162218, 13161759, 13162247, 13161117, 13160008, 13162646, 13160993, 13162802, 13162054, 13163206, 13161046, 13161277, 13163705, 13163153, 13160771, 13160832, 13163039, 13160393, 13161490, 13162496, 13162644, 13160301, 13160475, 13160588, 13160672, 13160847],
-    "score": 344,
-    "time": 1481564080,
-    "title": "Ask HN: Where is AI/ML actually adding value at your company?",
-    "type": "story"
 }, {
     "by": "montogeek",
     "descendants": 194,
