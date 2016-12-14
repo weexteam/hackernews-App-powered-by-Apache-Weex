@@ -25,6 +25,7 @@
     methods: {
       appendStories (ids) {
         return fetchItems(ids).then(items => {
+          console.log(items)
           this.topStories = this.topStories.concat(items)
         })
       },

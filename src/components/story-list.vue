@@ -4,13 +4,9 @@
       <text class="story-score">{{story.score}}</text>
       <a class="story-link" :href="story.url">
         <text class="story-title">{{story.title}}</text>
-        <text class="small-text story-host">({{ story.url | host }})</text>
+        <text class="small-text">({{ story.url | host }})</text>
       </a>
-      <div class="story-meta">
-        <text class="small-text story-by">{{story.by}}</text>
-        <text class="small-text story-time">{{ story.time | timeAgo }} ago</text>
-        <text class="small-text story-comment">{{story.comment}}</text>
-      </div>
+      <text class="small-text">by {{story.by}} | {{ story.time | timeAgo }} ago | {{ story.descendants }} comments</text>
     </cell>
   </list>
 </template>
@@ -23,7 +19,7 @@
     position: relative;
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 80px;
+    padding-left: 100px;
     padding-right: 40px;
     margin-bottom: 3px;
     border-bottom-width: 2px;
@@ -33,30 +29,25 @@
   }
   .story-score {
     position: absolute;
-    width: 80px;
+    width: 100px;
     text-align: center;
     left: 0;
-    top: 40px;
+    top: 20px;
     font-size: 32px;
     font-weight: bold;
     color: #FF6600;
   }
   .story-link {
-    padding-bottom: 15px;
+    margin-bottom: 15px;
   }
   .story-title {
-    font-size: 36px;
-  }
-  .story-meta {
-    color: #BBB;
+    font-size: 33px;
+    color: #404040;
   }
   .small-text {
     color: #BBB;
-    font-size: 24px;
-  }
-  .story-by {
-  }
-  .story-time {
+    font-size: 22px;
+    font-family: Verdana, Geneva, sans-serif;
   }
 </style>
 

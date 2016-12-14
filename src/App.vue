@@ -1,15 +1,17 @@
 <template>
-  <top-stories class="wrapper">
-    <text class="title">Hello Weex</text>
-  </top-stories>
+  <!-- <div> -->
+    <top-stories class="wrapper"></top-stories>
+  <!-- </div> -->
 </template>
 
 <script>
+  const TopStoriesView = require('./views/TopStoriesView.vue')
   const UserView = require('./views/UserView.vue')
 
   module.exports = {
     components: {
-      'top-stories': UserView
+      'top-stories': TopStoriesView,
+      'user-view': UserView
     }
   }
 </script>
