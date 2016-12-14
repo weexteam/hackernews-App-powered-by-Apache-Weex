@@ -56,7 +56,7 @@
     padding-right: 60px;
   }
   .user-name {
-    font-size: 80px;
+    font-size: 72px;
     font-weight: bold;
     margin-bottom: 60px;
   }
@@ -74,6 +74,6 @@
   .user-about {
     margin-top: 20px;
     font-size: 28px;
-    color: #555555;
+    color: #666666;
   }
 </style>

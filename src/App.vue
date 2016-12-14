@@ -1,7 +1,8 @@
 <template>
   <!-- <div> -->
-    <!-- <top-stories class="wrapper"></top-stories> -->
-    <comment-view class="wrapper" story-id="12922141"></comment-view>
+    <top-stories class="wrapper"></top-stories>
+    <!-- <comment-view class="wrapper" story-id="12922141"></comment-view> -->
+    <!-- <user-view user-id="Hanks10100"></user-view> -->
   <!-- </div> -->
 </template>
 

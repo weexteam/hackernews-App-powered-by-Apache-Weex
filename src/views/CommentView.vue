@@ -1,17 +1,19 @@
 <template>
   <div class="story-commonts">
     <app-header></app-header>
-    <div class="story-cell" v-if="story">
-      <story-item class="comment-story" :story="story"></story-item>
-    </div>
-    <div class="comments-box" v-if="comments">
-      <text class="comment-count">{{comments.length}} comments</text>
-      <list class="comment-list">
-        <cell class="comment-cell" v-for="comment in comments">
-          <comment-item :comment="comment"></comment-item>
-        </cell>
-      </list>
-    </div>
+    <scroller>
+      <div class="story-cell" v-if="story">
+        <story-item class="comment-story" :story="story"></story-item>
+      </div>
+      <div class="comments-box" v-if="comments">
+        <text class="comment-count">{{comments.length}} comments</text>
+        <list class="comment-list">
+          <cell class="comment-cell" v-for="comment in comments">
+            <comment-item :comment="comment"></comment-item>
+          </cell>
+        </list>
+      </div>
+    </scroller>
   </div>
 </template>
 
