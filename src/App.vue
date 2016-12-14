@@ -5,11 +5,11 @@
 </template>
 
 <script>
-  const TopStoriesView = require('./views/TopStoriesView.vue')
+  const UserView = require('./views/UserView.vue')
 
   module.exports = {
     components: {
-      'top-stories': TopStoriesView
+      'top-stories': UserView
     }
   }
 </script>

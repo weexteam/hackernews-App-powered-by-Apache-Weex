@@ -23,3 +23,25 @@ function pluralize (time, label) {
   }
   return time + label + 's'
 }
+
+export function unescape(text) {
+  let res = text || '';
+  [
+    ['<p>', '\n'],
+    ['&amp;', '&'],
+    ['&amp;', '&'],
+    ['&apos;', '\''],
+    ['&#x27;', '\''],
+    ['&#x2F;', '/'],
+    ['&#39;', '\''],
+    ['&#47;', '/'],
+    ['&lt;', '<'],
+    ['&gt;', '>'],
+    ['&nbsp;', ' '],
+    ['&quot;', '"']
+  ].forEach(pair => {
+    res = res.replace(new RegExp(pair[0], 'ig'), pair[1])
+  })
+
+  return res
+}

@@ -3,7 +3,8 @@
   cursor: initial;
   direction: initial;
   font: initial;
-  font-family: initial;
+  /*font-family: initial;*/
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   font-size: initial;
   font-style: initial;
   font-variant: initial;
