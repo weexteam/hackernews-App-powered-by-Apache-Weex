@@ -1,16 +1,19 @@
 <template>
   <!-- <div> -->
-    <top-stories class="wrapper"></top-stories>
+    <!-- <top-stories class="wrapper"></top-stories> -->
+    <comment-view class="wrapper" story-id="12922141"></comment-view>
   <!-- </div> -->
 </template>
 
 <script>
   const TopStoriesView = require('./views/TopStoriesView.vue')
+  const CommentView = require('./views/CommentView.vue')
   const UserView = require('./views/UserView.vue')
 
   module.exports = {
     components: {
       'top-stories': TopStoriesView,
+      'comment-view': CommentView,
       'user-view': UserView
     }
   }
