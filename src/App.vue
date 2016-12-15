@@ -8,14 +8,14 @@
 
 <script>
   const TopStoriesView = require('./views/TopStoriesView.vue')
-  const CommentView = require('./views/CommentView.vue')
-  const UserView = require('./views/UserView.vue')
+  // const CommentView = require('./views/CommentView.vue')
+  // const UserView = require('./views/UserView.vue')
 
   module.exports = {
     components: {
       'top-stories': TopStoriesView,
-      'comment-view': CommentView,
-      'user-view': UserView
+      // 'comment-view': CommentView,
+      // 'user-view': UserView
     }
   }
 </script>

@@ -11,11 +11,6 @@
     background-color: #F5F5F5;
   }
   .story-cell {
-    position: relative;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 100px;
-    padding-right: 40px;
     margin-bottom: 3px;
     border-bottom-width: 2px;
     border-bottom-style: solid;

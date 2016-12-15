@@ -10,6 +10,13 @@
 </template>
 
 <style>
+  .cell-item {
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 40px;
+  }
   .story-score {
     position: absolute;
     width: 100px;
