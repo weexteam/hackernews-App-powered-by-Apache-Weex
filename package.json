@@ -30,7 +30,7 @@
   "author": "Hanks <zhanghan.me@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "firebase": "^3.6.3"
+    "browser-request": "^0.3.3"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

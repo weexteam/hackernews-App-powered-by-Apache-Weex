@@ -1,35 +1,22 @@
-import Firebase from 'firebase/app'
-import 'firebase/database'
+import request from 'browser-request'
 
-const config = {
-  databaseURL: 'https://hacker-news.firebaseio.com'
-}
-const version = '/v0'
+const baseURL = 'https://hacker-news.firebaseio.com/v0'
 
-Firebase.initializeApp(config)
-const api = Firebase.database().ref(version)
-
-function fetch (child) {
-  const cache = api.cachedItems
-  if (cache && cache.has(child)) {
-    return Promise.resolve(cache.get(child))
-  } else {
-    return new Promise((resolve, reject) => {
-      api.child(child).once('value', snapshot => {
-        const val = snapshot.val()
-        // mark the timestamp when this item is cached
-        if (val) val.__lastUpdated = Date.now()
-        cache && cache.set(child, val)
-        resolve(val)
-      }, reject)
+export function fetch (path) {
+  return new Promise((resolve, reject) => {
+    request({ url: `${baseURL}/${path}.json` }, (error, response, body) => {
+      if (!error && response.statusCode == 200) {
+        resolve(JSON.parse(body))
+      }
+      else {
+        reject(error)
+      }
     })
-  }
+  })
 }
 
 export function fetchIdsByType (type) {
-  return api.cachedIds && api.cachedIds[type]
-    ? Promise.resolve(api.cachedIds[type])
-    : fetch(`${type}stories`)
+  return fetch(`${type}stories`)
 }
 
 export function fetchItem (id) {
