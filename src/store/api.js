@@ -1,15 +1,19 @@
-import request from 'browser-request'
+const stream = weex.require('stream')
 
 const baseURL = 'https://hacker-news.firebaseio.com/v0'
 
 export function fetch (path) {
   return new Promise((resolve, reject) => {
-    request({ url: `${baseURL}/${path}.json` }, (error, response, body) => {
-      if (!error && response.statusCode == 200) {
-        resolve(JSON.parse(body))
+    stream.fetch({
+      method: 'GET',
+      url: `${baseURL}/${path}.json`,
+      type: 'json'
+    }, (response) => {
+      if (response.status === 200) {
+        resolve(response.data)
       }
       else {
-        reject(error)
+        reject(response)
       }
     })
   })
