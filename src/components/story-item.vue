@@ -1,11 +1,13 @@
 <template>
   <div class="cell-item">
     <text class="story-score">{{story.score}}</text>
-    <a class="story-link" :href="story.url">
+    <router-link :to="`/article/${story.url}`" class="story-link">
       <text class="story-title">{{story.title}}</text>
       <text class="small-text">({{ story.url | host }})</text>
-    </a>
-    <text class="small-text">by {{story.by}} | {{ story.time | timeAgo }} ago | {{ story.descendants }} comments</text>
+    </router-link>
+    <router-link :to="`/item/${story.id}`" class="story-link">
+      <text class="small-text">by {{story.by}} | {{ story.time | timeAgo }} ago | {{ story.descendants }} comments</text>
+    </router-link>
   </div>
 </template>
 

@@ -3,7 +3,11 @@
     <text class="small-text comment-btn" @click.native="toggle(false)" v-if="collapsed">[+]</text>
     <text class="small-text comment-btn" @click.native="toggle(true)" v-else>[-]</text>
     <!-- <text class="comment-score">{{comment.score}}</text> -->
-    <text class="small-text">by {{comment.by}} | {{ comment.time | timeAgo }} ago{{collapsed ? '  (collapsed)' : ''}}</text>
+
+    <router-link :to="`/user/${comment.by}`">
+      <text class="small-text">by {{comment.by}} | {{ comment.time | timeAgo }} ago{{collapsed ? '  (collapsed)' : ''}}</text>
+    </router-link>
+
     <div class="comment-inner" v-if="!collapsed">
       <text class="comment-title">{{comment.text | unescape }}</text>
       <!-- <div class="comment-inner" v-if="comment.replys">

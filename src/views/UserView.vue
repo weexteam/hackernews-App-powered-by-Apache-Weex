@@ -22,14 +22,23 @@
     components: {
       'app-header': require('../components/app-header.vue')
     },
+    // props: {
+    //   userId: {
+    //     type: String,
+    //     required: true,
+    //     default: 'Hanks10100'
+    //   }
+    // },
 
-    props: {
-      userId: {
-        type: String,
-        required: true,
-        default: 'Hanks10100'
+    computed: {
+      userId () {
+        if (this.$route && this.$route.params) {
+          return this.$route.params.id
+        }
+        return 'Hanks10100'
       }
     },
+
     data () {
       return {
         user: null

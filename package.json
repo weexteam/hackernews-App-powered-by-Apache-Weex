@@ -30,7 +30,10 @@
   "author": "Hanks <zhanghan.me@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "vue": "^2.1.5"
+    "vue": "^2.1.5",
+    "vue-router": "^2.1.1",
+    "vuex": "^2.1.1",
+    "vuex-router-sync": "^4.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

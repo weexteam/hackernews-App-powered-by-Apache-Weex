@@ -40,28 +40,26 @@
 <script>
   const { fetchItems, fetchItem } = require('../store/api')
 
-  // function fetchComments (comment) {
-  //   // console.log(comment.kids)
-  //   if (comment && comment.kids) {
-  //     return fetchItems(comment.kids).then(items => {
-  //       // console.log(items)
-  //       comment.replys = items
-  //       fetchComments(comment.replys)
-  //     })
-  //   }
-  // }
-
   module.exports = {
     components: {
       'app-header': require('../components/app-header.vue'),
       'story-item': require('../components/story-item.vue'),
       'comment-item': require('../components/comment-item.vue')
     },
-    props: {
-      storyId: {
-        type: String,
-        required: true,
-        default: '12922141'
+
+    // props: {
+    //   storyId: {
+    //     type: String,
+    //     required: true,
+    //     default: '12922141'
+    //   }
+    // },
+    computed: {
+      storyId () {
+        if (this.$route && this.$route.params) {
+          return this.$route.params.id
+        }
+        return '12922141'
       }
     },
 
