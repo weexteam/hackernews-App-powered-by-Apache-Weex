@@ -1,13 +1,13 @@
 // import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-// import store from './store'
-// import { sync } from 'vuex-router-sync'
+import store from './store'
+import { sync } from 'vuex-router-sync'
 import * as filters from './filters'
 
 // sync the router with the vuex store.
 // this registers `store.state.route`
-// sync(store, router)
+sync(store, router)
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
@@ -20,5 +20,5 @@ Object.keys(filters).forEach(key => {
 const app = new Vue(Vue.util.extend({
   el: '#root',
   router,
-  // store
+  store
 }, App))

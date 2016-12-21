@@ -16,19 +16,17 @@
 </template>
 
 <script>
-  const { fetchUser } = require('../store/api')
+
+  function fetchUser (store) {
+    return store.dispatch('FETCH_USER', {
+      id: store.state.route.params.id
+    })
+  }
 
   module.exports = {
     components: {
       'app-header': require('../components/app-header.vue')
     },
-    // props: {
-    //   userId: {
-    //     type: String,
-    //     required: true,
-    //     default: 'Hanks10100'
-    //   }
-    // },
 
     computed: {
       userId () {
@@ -36,23 +34,15 @@
           return this.$route.params.id
         }
         return 'Hanks10100'
+      },
+      user () {
+        return this.$store.state.users[this.$route.params.id]
       }
     },
 
-    data () {
-      return {
-        user: null
-      }
-    },
-
+    // preFetch: fetchUser,
     created () {
-      if (this.userId) {
-        // console.log('will fetchUser:', this.userId)
-        fetchUser(this.userId).then(user => {
-          // console.log(user)
-          this.user = user
-        })
-      }
+      fetchUser(this.$store)
     }
   }
 </script>
