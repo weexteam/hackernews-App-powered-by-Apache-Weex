@@ -3,15 +3,14 @@
     <header></header>
     <scroller>
       <div class="story-cell" v-if="story">
-        <story class="comment-story" :story="story"></story>
+        <story class="comment-story" :story="story" no-comment="true"></story>
       </div>
       <div class="comments-box" v-if="story && story.kids">
-        <text class="comment-count">{{story.kids.length}} story.kids</text>
-        <list class="comment-list">
-          <cell class="comment-cell" v-for="id in story.kids">
-            <comment :id="id"></comment>
-          </cell>
-        </list>
+        <text class="comment-count" v-if="story.kids.length">{{story.kids.length}} comments</text>
+        <text class="comment-count" v-else>no comments</text>
+        <div class="comment-list">
+          <comment v-for="id in story.kids" :id="id"></comment>
+        </div>
       </div>
     </scroller>
   </div>
@@ -66,7 +65,6 @@
 
     created () {
       // console.log(this.$store)
-      // console.log(this.$route.params)
       fetchItemAndComments(this.$store).then(() => {
         this.loading = false
       })

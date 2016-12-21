@@ -10,8 +10,9 @@
       <router-link class="text-cell" :to="`/user/${story.by}`">
         <text class="small-text link-text">{{story.by}}</text>
       </router-link>
-      <text class="small-text text-cell"> | {{ story.time | timeAgo }} ago | </text>
-      <router-link class="text-cell" :to="`/item/${story.id}`">
+      <text class="small-text text-cell"> | {{ story.time | timeAgo }} ago</text>
+      <text class="small-text text-cell" v-if="!noComment"> | </text>
+      <router-link class="text-cell" :to="`/item/${story.id}`" v-if="!noComment">
         <text class="small-text link-text">{{ story.descendants }} comments</text>
       </router-link>
     </div>
@@ -70,6 +71,10 @@
       story: {
         type: Object,
         required: true
+      },
+      'no-comment': {
+        type: [String, Boolean],
+        default: false
       }
     }
   }
