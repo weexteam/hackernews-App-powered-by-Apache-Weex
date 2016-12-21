@@ -1,6 +1,6 @@
 <template>
   <div class="user-view">
-    <app-header></app-header>
+    <header></header>
     <div class="user-info">
       <text class="user-name">{{ userId }}</text>
       <div class="user-meta" v-if="user">
@@ -16,10 +16,10 @@
 </template>
 
 <script>
-  import AppHeader from '../components/app-header.vue'
+  import Header from '../components/header.vue'
 
   export default {
-    components: { AppHeader },
+    components: { Header },
     computed: {
       userId () {
         if (this.$route && this.$route.params) {

@@ -2,9 +2,8 @@
   <router-view class="view"></router-view>
 </template>
 
-<style>
+<style scoped>
   .view {
-    background-color: #F5F5F5;
     height: 100%;
   }
 </style>

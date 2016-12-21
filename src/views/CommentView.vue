@@ -1,15 +1,15 @@
 <template>
-  <div class="story-commonts">
-    <app-header></app-header>
+  <div class="commont-view">
+    <header></header>
     <scroller>
       <div class="story-cell" v-if="story">
-        <story-item class="comment-story" :story="story"></story-item>
+        <story class="comment-story" :story="story"></story>
       </div>
       <div class="comments-box" v-if="story && story.kids">
         <text class="comment-count">{{story.kids.length}} story.kids</text>
         <list class="comment-list">
           <cell class="comment-cell" v-for="id in story.kids">
-            <comment-item :id="id"></comment-item>
+            <comment :id="id"></comment>
           </cell>
         </list>
       </div>
@@ -17,30 +17,10 @@
   </div>
 </template>
 
-<style scoped>
-  .comments-box {
-    margin-top: 20px;
-    background-color: #FFFFFF;
-    /*padding-top: 20px;*/
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-  .comment-count {
-    font-size: 36px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    /* padding-left: 20px; */
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #EEEEEE;
-    margin-bottom: 30px;
-  }
-</style>
-
 <script>
-  import AppHeader from '../components/app-header.vue'
-  import StoryItem from '../components/story-item.vue'
-  import CommentItem from '../components/comment-item.vue'
+  import Header from '../components/header.vue'
+  import Story from '../components/story.vue'
+  import Comment from '../components/comment.vue'
 
   function fetchItem (store) {
     return store.dispatch('FETCH_ITEMS', {
@@ -65,7 +45,7 @@
   }
 
   export default {
-    components: { AppHeader, StoryItem, CommentItem },
+    components: { Header, Story, Comment },
     data () {
       return {
         loading: true
@@ -93,3 +73,33 @@
     }
   }
 </script>
+
+<style scoped>
+  .commont-view {
+    background-color: #F5F5F5;
+  }
+  .story-cell {
+    margin-bottom: 3px;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #DDDDDD;
+    background-color: #FFFFFF;
+  }
+  .comments-box {
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    /*padding-top: 20px;*/
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .comment-count {
+    font-size: 36px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* padding-left: 20px; */
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #EEEEEE;
+    margin-bottom: 30px;
+  }
+</style>

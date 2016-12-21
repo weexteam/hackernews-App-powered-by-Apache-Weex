@@ -1,5 +1,4 @@
 const stream = weex.require('stream')
-
 const baseURL = 'https://hacker-news.firebaseio.com/v0'
 
 export function fetch (path) {

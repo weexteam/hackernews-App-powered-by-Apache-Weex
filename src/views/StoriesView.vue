@@ -1,9 +1,9 @@
 <template>
   <div class="stories-view">
-    <app-header></app-header>
+    <header></header>
     <list class="story-list" @loadmore="loadMoreStories">
       <cell class="story-cell" v-for="story in stories">
-        <story-item :story="story"></story-item>
+        <story :story="story"></story>
       </cell>
     </list>
     <div class="loading" v-if="loading">
@@ -13,11 +13,11 @@
 </template>
 
 <script>
-  import AppHeader from '../components/app-header.vue'
-  import StoryItem from '../components/story-item.vue'
+  import Header from '../components/header.vue'
+  import Story from '../components/story.vue'
 
   export default {
-    components: { AppHeader, StoryItem },
+    components: { Header, Story },
     props: {
       type: {
         type: String,

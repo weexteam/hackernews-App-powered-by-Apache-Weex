@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .cell-item {
     position: relative;
     padding-top: 20px;
@@ -65,11 +65,11 @@
 </style>
 
 <script>
-  module.exports = {
+  export default {
     props: {
       story: {
         type: Object,
-        // required: true
+        required: true
       }
     }
   }
