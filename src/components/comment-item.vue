@@ -49,21 +49,21 @@
 </style>
 
 <script>
-  const { fetchItems } = require('../store/api')
 
-  module.exports = {
+  export default {
     name: 'comment-item',
     props: {
-      comment: {
-        type: Object,
-        required: true
+      id: {
+        type: [String, Number],
+        // required: true,
+        default: 'Hanks10100'
       },
       depth: {
         type: [Number, String],
         default: 1
       }
     },
-    data: function () {
+    data () {
       return {
         collapsed: false
       }
@@ -71,15 +71,21 @@
     computed: {
       indent () {
         return Math.min(Number(this.depth) * 50, 200) + 'px'
+      },
+      comment () {
+        return this.$store.state.items[this.id]
       }
     },
+
     methods: {
       toggle (state) {
         this.collapsed = (state === undefined) ? !this.collapsed : state
       }
     },
+
     created () {
-      // console.log('comment item created')
+      console.log('comment item created', this.id)
+      console.log(this.$store)
     }
   }
 </script>

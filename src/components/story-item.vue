@@ -3,7 +3,7 @@
     <text class="story-score">{{story.score}}</text>
     <router-link :to="`/article/${story.url}`" class="story-link">
       <text class="story-title">{{story.title}}</text>
-      <text class="small-text">({{ story.url | host }})</text>
+      <text class="small-text" v-if="story.url">({{ story.url | host }})</text>
     </router-link>
     <div class="text-group">
       <text class="small-text text-cell">by </text>

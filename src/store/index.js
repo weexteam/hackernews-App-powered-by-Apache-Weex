@@ -7,7 +7,8 @@ import { fetchItems, fetchIdsByType, fetchUser } from './api'
 const store = new Vuex.Store({
   state: {
     activeType: null,
-    itemsPerPage: 20,
+    itemsPerPage: 10,
+    itemCount: 20,
     items: {/* [id: number]: Item */},
     users: {/* [id: string]: User */},
     lists: {
@@ -26,6 +27,12 @@ const store = new Vuex.Store({
       return fetchIdsByType(type)
         .then(ids => commit('SET_LIST', { type, ids }))
         .then(() => dispatch('ENSURE_ACTIVE_ITEMS'))
+    },
+
+    // load more items
+    LOAD_MORE_ITEMS: ({ dispatch, state }) => {
+      state.itemCount += state.itemsPerPage
+      return dispatch('ENSURE_ACTIVE_ITEMS')
     },
 
     // ensure all active items are fetched
@@ -78,15 +85,8 @@ const store = new Vuex.Store({
     // ids of the items that should be currently displayed based on
     // current list type and current pagination
     activeIds (state) {
-      const { activeType, itemsPerPage, lists } = state
-      const page = Number(state.route.params.page) || 1
-      if (activeType) {
-        const start = (page - 1) * itemsPerPage
-        const end = page * itemsPerPage
-        return lists[activeType].slice(start, end)
-      } else {
-        return []
-      }
+      const { activeType, lists, itemCount } = state
+      return activeType ? lists[activeType].slice(0, itemCount) : []
     },
 
     // items that should be currently displayed.

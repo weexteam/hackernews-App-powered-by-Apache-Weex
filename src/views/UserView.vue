@@ -8,26 +8,18 @@
         <text class="meta-label">Karma:   {{ user.karma }}</text>
         <text class="meta-label user-about" v-if="user.about">{{ user.about | unescape }}</text>
       </div>
-      <div class="user-loading" v-else>
-        loading...
+      <div class="loading" v-else>
+        <text class="loading-text">loading ...</text>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import AppHeader from '../components/app-header.vue'
 
-  function fetchUser (store) {
-    return store.dispatch('FETCH_USER', {
-      id: store.state.route.params.id
-    })
-  }
-
-  module.exports = {
-    components: {
-      'app-header': require('../components/app-header.vue')
-    },
-
+  export default {
+    components: { AppHeader },
     computed: {
       userId () {
         if (this.$route && this.$route.params) {
@@ -36,19 +28,17 @@
         return 'Hanks10100'
       },
       user () {
-        return this.$store.state.users[this.$route.params.id]
+        return this.$store.state.users[this.userId]
       }
     },
 
-    // preFetch: fetchUser,
     created () {
-      fetchUser(this.$store)
+      this.$store.dispatch('FETCH_USER', { id: this.userId })
     }
   }
 </script>
 
-<style>
-  .user-view {}
+<style scoped>
   .user-info {
     padding-top: 60px;
     padding-left: 80px;
@@ -59,7 +49,7 @@
     font-weight: bold;
     margin-bottom: 60px;
   }
-  .user-loading {
+  .loading-text {
     font-family: Verdana, Geneva, sans-serif;
     font-size: 44px;
     color: #BBBBBB;

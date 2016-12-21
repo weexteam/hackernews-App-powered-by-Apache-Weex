@@ -5,11 +5,11 @@
       <div class="story-cell" v-if="story">
         <story-item class="comment-story" :story="story"></story-item>
       </div>
-      <div class="comments-box" v-if="comments">
-        <text class="comment-count">{{comments.length}} comments</text>
+      <div class="comments-box" v-if="story && story.kids">
+        <text class="comment-count">{{story.kids.length}} story.kids</text>
         <list class="comment-list">
-          <cell class="comment-cell" v-for="comment in comments">
-            <comment-item :comment="comment"></comment-item>
+          <cell class="comment-cell" v-for="id in story.kids">
+            <comment-item :id="id"></comment-item>
           </cell>
         </list>
       </div>
@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .comments-box {
     margin-top: 20px;
     background-color: #FFFFFF;
@@ -38,59 +38,58 @@
 </style>
 
 <script>
-  const { fetchItems, fetchItem } = require('../store/api')
+  import AppHeader from '../components/app-header.vue'
+  import StoryItem from '../components/story-item.vue'
+  import CommentItem from '../components/comment-item.vue'
 
-  module.exports = {
-    components: {
-      'app-header': require('../components/app-header.vue'),
-      'story-item': require('../components/story-item.vue'),
-      'comment-item': require('../components/comment-item.vue')
+  function fetchItem (store) {
+    return store.dispatch('FETCH_ITEMS', {
+      ids: [store.state.route.params.id]
+    })
+  }
+  function fetchComments (store, item) {
+    if (item.kids) {
+      return store.dispatch('FETCH_ITEMS', {
+        ids: item.kids
+      }).then(() => Promise.all(item.kids.map(id => {
+        return fetchComments(store, store.state.items[id])
+      })))
+    }
+  }
+
+  function fetchItemAndComments (store) {
+    return fetchItem(store).then(() => {
+      const { items, route } = store.state
+      return fetchComments(store, items[route.params.id])
+    })
+  }
+
+  export default {
+    components: { AppHeader, StoryItem, CommentItem },
+    data () {
+      return {
+        loading: true
+      }
     },
 
-    // props: {
-    //   storyId: {
-    //     type: String,
-    //     required: true,
-    //     default: '12922141'
-    //   }
-    // },
     computed: {
-      storyId () {
+      id () {
         if (this.$route && this.$route.params) {
           return this.$route.params.id
         }
         return '12922141'
-      }
-    },
-
-    data () {
-      return {
-        story: null,
-        comments: null
-      }
-    },
-
-    methods: {
-      getStory (id) {
-        // console.log('will get story:', id)
-        return fetchItem(id).then(story => {
-          // console.log(story)
-          this.story = story
-          this.getComments(story.kids)
-        })
       },
-
-      getComments (ids) {
-        return fetchItems(ids).then(comments => {
-          // console.log(comments)
-          this.comments = comments
-          // comments.forEach(fetchComments)
-        })
+      story () {
+        return this.$store.state.items[this.id]
       }
     },
 
     created () {
-      this.getStory(this.storyId)
+      // console.log(this.$store)
+      // console.log(this.$route.params)
+      fetchItemAndComments(this.$store).then(() => {
+        this.loading = false
+      })
     }
   }
 </script>
