@@ -9,7 +9,7 @@ import CommentView from './views/CommentView.vue'
 import UserView from './views/UserView.vue'
 
 export default new Router({
-  // mode: 'history',
+  // mode: 'abstract',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     { path: '/top/:page(\\d+)?', component: TopStoriesView },

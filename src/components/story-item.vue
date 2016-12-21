@@ -5,9 +5,16 @@
       <text class="story-title">{{story.title}}</text>
       <text class="small-text">({{ story.url | host }})</text>
     </router-link>
-    <router-link :to="`/item/${story.id}`" class="story-link">
-      <text class="small-text">by {{story.by}} | {{ story.time | timeAgo }} ago | {{ story.descendants }} comments</text>
-    </router-link>
+    <div class="text-group">
+      <text class="small-text text-cell">by </text>
+      <router-link class="text-cell" :to="`/user/${story.by}`">
+        <text class="small-text link-text">{{story.by}}</text>
+      </router-link>
+      <text class="small-text text-cell"> | {{ story.time | timeAgo }} ago | </text>
+      <router-link class="text-cell" :to="`/item/${story.id}`">
+        <text class="small-text link-text">{{ story.descendants }} comments</text>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -15,7 +22,7 @@
   .cell-item {
     position: relative;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
     padding-left: 100px;
     padding-right: 40px;
   }
@@ -30,7 +37,7 @@
     color: #FF6600;
   }
   .story-link {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
   .story-title {
     font-size: 33px;
@@ -39,7 +46,21 @@
   .small-text {
     color: #BBB;
     font-size: 22px;
+    margin-bottom: 0;
     font-family: Verdana, Geneva, sans-serif;
+  }
+  .link-text {
+    /*color: red;*/
+    text-decoration: underline;
+  }
+  .text-group {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .text-cell {
+    flex-grow: 0;
   }
 </style>
 
