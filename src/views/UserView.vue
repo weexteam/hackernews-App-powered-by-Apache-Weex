@@ -1,6 +1,6 @@
 <template>
   <div class="user-view">
-    <app-header></app-header>
+    <header></header>
     <div class="user-info">
       <text class="user-name">{{ userId }}</text>
       <div class="user-meta" v-if="user">
@@ -8,48 +8,37 @@
         <text class="meta-label">Karma:   {{ user.karma }}</text>
         <text class="meta-label user-about" v-if="user.about">{{ user.about | unescape }}</text>
       </div>
-      <div class="user-loading" v-else>
-        loading...
+      <div class="loading" v-else>
+        <text class="loading-text">loading ...</text>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  const { fetchUser } = require('../store/api')
+  import Header from '../components/header.vue'
 
-  module.exports = {
-    components: {
-      'app-header': require('../components/app-header.vue')
-    },
-
-    props: {
-      userId: {
-        type: String,
-        required: true,
-        default: 'Hanks10100'
-      }
-    },
-    data () {
-      return {
-        user: null
+  export default {
+    components: { Header },
+    computed: {
+      userId () {
+        if (this.$route && this.$route.params) {
+          return this.$route.params.id
+        }
+        return 'Hanks10100'
+      },
+      user () {
+        return this.$store.state.users[this.userId]
       }
     },
 
     created () {
-      if (this.userId) {
-        // console.log('will fetchUser:', this.userId)
-        fetchUser(this.userId).then(user => {
-          // console.log(user)
-          this.user = user
-        })
-      }
+      this.$store.dispatch('FETCH_USER', { id: this.userId })
     }
   }
 </script>
 
-<style>
-  .user-view {}
+<style scoped>
   .user-info {
     padding-top: 60px;
     padding-left: 80px;
@@ -60,7 +49,7 @@
     font-weight: bold;
     margin-bottom: 60px;
   }
-  .user-loading {
+  .loading-text {
     font-family: Verdana, Geneva, sans-serif;
     font-size: 44px;
     color: #BBBBBB;

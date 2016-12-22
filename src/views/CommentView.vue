@@ -1,29 +1,94 @@
 <template>
-  <div class="story-commonts">
-    <app-header></app-header>
+  <div class="commont-view">
+    <header></header>
     <scroller>
       <div class="story-cell" v-if="story">
-        <story-item class="comment-story" :story="story"></story-item>
+        <story class="comment-story" :story="story" no-comment="true"></story>
       </div>
-      <div class="comments-box" v-if="comments">
-        <text class="comment-count">{{comments.length}} comments</text>
-        <list class="comment-list">
-          <cell class="comment-cell" v-for="comment in comments">
-            <comment-item :comment="comment"></comment-item>
-          </cell>
-        </list>
+      <div class="comments-box" v-if="story && story.kids">
+        <text class="comment-count" v-if="story.kids.length">{{story.kids.length}} comments</text>
+        <text class="comment-count" v-else>no comments</text>
+        <div class="comment-list">
+          <comment v-for="id in story.kids" :id="id"></comment>
+        </div>
       </div>
     </scroller>
   </div>
 </template>
 
-<style>
+<script>
+  import Header from '../components/header.vue'
+  import Story from '../components/story.vue'
+  import Comment from '../components/comment.vue'
+
+  function fetchItem (store) {
+    return store.dispatch('FETCH_ITEMS', {
+      ids: [store.state.route.params.id]
+    })
+  }
+  function fetchComments (store, item) {
+    if (item.kids) {
+      return store.dispatch('FETCH_ITEMS', {
+        ids: item.kids
+      }).then(() => Promise.all(item.kids.map(id => {
+        return fetchComments(store, store.state.items[id])
+      })))
+    }
+  }
+
+  function fetchItemAndComments (store) {
+    return fetchItem(store).then(() => {
+      const { items, route } = store.state
+      return fetchComments(store, items[route.params.id])
+    })
+  }
+
+  export default {
+    components: { Header, Story, Comment },
+    data () {
+      return {
+        loading: true
+      }
+    },
+
+    computed: {
+      id () {
+        if (this.$route && this.$route.params) {
+          return this.$route.params.id
+        }
+        return '12922141'
+      },
+      story () {
+        return this.$store.state.items[this.id]
+      }
+    },
+
+    created () {
+      // console.log(this.$store)
+      fetchItemAndComments(this.$store).then(() => {
+        this.loading = false
+      })
+    }
+  }
+</script>
+
+<style scoped>
+  .commont-view {
+    background-color: #F5F5F5;
+  }
+  .story-cell {
+    margin-bottom: 3px;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #DDDDDD;
+    background-color: #FFFFFF;
+  }
   .comments-box {
     margin-top: 20px;
     background-color: #FFFFFF;
     /*padding-top: 20px;*/
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 35px;
+    padding-right: 35px;
   }
   .comment-count {
     font-size: 36px;
@@ -36,63 +101,3 @@
     margin-bottom: 30px;
   }
 </style>
-
-<script>
-  const { fetchItems, fetchItem } = require('../store/api')
-
-  // function fetchComments (comment) {
-  //   // console.log(comment.kids)
-  //   if (comment && comment.kids) {
-  //     return fetchItems(comment.kids).then(items => {
-  //       // console.log(items)
-  //       comment.replys = items
-  //       fetchComments(comment.replys)
-  //     })
-  //   }
-  // }
-
-  module.exports = {
-    components: {
-      'app-header': require('../components/app-header.vue'),
-      'story-item': require('../components/story-item.vue'),
-      'comment-item': require('../components/comment-item.vue')
-    },
-    props: {
-      storyId: {
-        type: String,
-        required: true,
-        default: '12922141'
-      }
-    },
-
-    data () {
-      return {
-        story: null,
-        comments: null
-      }
-    },
-
-    methods: {
-      getStory (id) {
-        // console.log('will get story:', id)
-        return fetchItem(id).then(story => {
-          // console.log(story)
-          this.story = story
-          this.getComments(story.kids)
-        })
-      },
-
-      getComments (ids) {
-        return fetchItems(ids).then(comments => {
-          // console.log(comments)
-          this.comments = comments
-          // comments.forEach(fetchComments)
-        })
-      }
-    },
-
-    created () {
-      this.getStory(this.storyId)
-    }
-  }
-</script>
