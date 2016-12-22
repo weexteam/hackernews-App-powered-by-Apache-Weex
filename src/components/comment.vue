@@ -2,10 +2,9 @@
   <div :class="className" :style="{ marginLeft: indent }" v-if="comment">
     <text class="small-text comment-btn" @click="toggle(false)" v-if="collapsed">[+]</text>
     <text class="small-text comment-btn" @click="toggle(true)" v-else>[-]</text>
-    <!-- <text class="comment-score">{{comment.score}}</text> -->
 
     <div class="text-group">
-      <text class="text-cell small-text">by </text>
+      <text class="text-cell small-text">by&nbsp;</text>
       <router-link class="text-cell" :to="`/user/${comment.by}`">
         <text class="small-text link">{{comment.by}}</text>
       </router-link>
@@ -50,7 +49,7 @@
         return Number(this.depth) > 1 ? 'deep-comment' : 'comment'
       },
       indent () {
-        return Math.min(Number(this.depth) * 25, 200) + 'px'
+        return Number(this.depth) > 4 ? 0 : '50px'
       },
       comment () {
         return store.state.items[this.id]

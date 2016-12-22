@@ -87,8 +87,8 @@
     margin-top: 20px;
     background-color: #FFFFFF;
     /*padding-top: 20px;*/
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 35px;
+    padding-right: 35px;
   }
   .comment-count {
     font-size: 36px;
