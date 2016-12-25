@@ -51,17 +51,16 @@
     display: flex;
     position: absolute;
     left: 120px;
-    top: 0;
-    flex-flow: row nowrap;
+    top: 35px;
+    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
   }
   .link {
-    display: flex;
-    align-items: center;
     padding-left: 15px;
     padding-right: 15px;
-    height: 118px;
+    height: 18px;
     flex-grow: 0;
     border-bottom-width: 4px;
     border-bottom-style: solid;

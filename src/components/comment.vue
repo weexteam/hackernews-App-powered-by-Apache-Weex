@@ -46,7 +46,7 @@
 
     computed: {
       className () {
-        return Number(this.depth) > 1 ? 'deep-comment' : 'comment'
+        return Number(this.depth) > 1 ? ['deep-comment'] : ['comment']
       },
       indent () {
         return Number(this.depth) > 4 ? 0 : '50px'
@@ -79,7 +79,7 @@
   }
   .text-group {
     display: flex;
-    flex-flow: row nowrap;
+    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
   }

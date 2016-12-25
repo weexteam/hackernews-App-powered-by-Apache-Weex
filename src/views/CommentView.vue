@@ -21,28 +21,6 @@
   import Story from '../components/story.vue'
   import Comment from '../components/comment.vue'
 
-  function fetchItem (store) {
-    return store.dispatch('FETCH_ITEMS', {
-      ids: [store.state.route.params.id]
-    })
-  }
-  function fetchComments (store, item) {
-    if (item.kids) {
-      return store.dispatch('FETCH_ITEMS', {
-        ids: item.kids
-      }).then(() => Promise.all(item.kids.map(id => {
-        return fetchComments(store, store.state.items[id])
-      })))
-    }
-  }
-
-  function fetchItemAndComments (store) {
-    return fetchItem(store).then(() => {
-      const { items, route } = store.state
-      return fetchComments(store, items[route.params.id])
-    })
-  }
-
   export default {
     components: { Header, Story, Comment },
     data () {
@@ -63,9 +41,33 @@
       }
     },
 
+    methods: {
+      fetchItem () {
+        return this.$store.dispatch('FETCH_ITEMS', {
+          ids: [this.id]
+        })
+      },
+      fetchComments (item) {
+        if (item.kids) {
+          return this.$store.dispatch('FETCH_ITEMS', {
+            ids: item.kids
+          }).then(() => Promise.all(item.kids.map(id => {
+            return this.fetchComments(this.$store.state.items[id])
+          })))
+        }
+      },
+
+      fetchItemAndComments () {
+        return this.fetchItem().then(() => {
+          const { items, route } = this.$store.state
+          return this.fetchComments(items[this.id])
+        })
+      }
+    },
+
     created () {
       // console.log(this.$store)
-      fetchItemAndComments(this.$store).then(() => {
+      this.fetchItemAndComments().then(() => {
         this.loading = false
       })
     }

@@ -56,7 +56,8 @@
   }
   .text-group {
     display: flex;
-    flex-flow: row nowrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
   }
