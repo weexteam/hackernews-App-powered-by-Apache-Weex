@@ -60,14 +60,6 @@
   .link {
     padding-left: 15px;
     padding-right: 15px;
-    height: 18px;
-    flex-grow: 0;
-    border-bottom-width: 4px;
-    border-bottom-style: solid;
-    border-bottom-color: #FF6600;
-  }
-  .router-link-active {
-    border-bottom-color: #FFC198;
   }
   .title {
     font-family: Verdana, Geneva, sans-serif;
