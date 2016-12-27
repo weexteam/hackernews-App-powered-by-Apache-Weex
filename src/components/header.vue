@@ -1,15 +1,15 @@
 <template>
   <div class="header">
-    <router-link class="logo" to="/" exact>
+    <div class="logo" @click="jump('/')">
       <image class="image" src="https://news.ycombinator.com/favicon.ico"></image>
-    </router-link>
+    </div>
     <div class="nav">
-      <router-link class="link" to="/top">
+      <div class="link" @click="jump('/top')">
         <text class="title">Top</text>
-      </router-link>
-      <router-link class="link" to="/new">
+      </div>
+      <div class="link" @click="jump('/new')">
         <text class="title">New</text>
-      </router-link>
+      </div>
       <router-link class="link" to="/show">
         <text class="title">Show</text>
       </router-link>
@@ -22,6 +22,20 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    methods: {
+      jump (to) {
+        // console.log('jump to', to)
+        if (this.$router) {
+          // console.log(`router.push(${to})`)
+          this.$router.push(to)
+        }
+      }
+    }
+  }
+</script>
 
 <style scoped>
   .header {
@@ -51,24 +65,15 @@
     display: flex;
     position: absolute;
     left: 120px;
-    top: 0;
-    flex-flow: row nowrap;
+    top: 35px;
+    flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
   }
   .link {
-    display: flex;
-    align-items: center;
     padding-left: 15px;
     padding-right: 15px;
-    height: 118px;
-    flex-grow: 0;
-    border-bottom-width: 4px;
-    border-bottom-style: solid;
-    border-bottom-color: #FF6600;
-  }
-  .router-link-active {
-    border-bottom-color: #FFC198;
   }
   .title {
     font-family: Verdana, Geneva, sans-serif;

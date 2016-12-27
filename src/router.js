@@ -19,7 +19,6 @@ function createStoriesView (type) {
 
 export default new Router({
   // mode: 'abstract',
-  scrollBehavior: () => ({ y: 0 }),
   routes: [
     { path: '/top', component: createStoriesView('top') },
     { path: '/new', component: createStoriesView('new') },
