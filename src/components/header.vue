@@ -27,9 +27,7 @@
   export default {
     methods: {
       jump (to) {
-        // console.log('jump to', to)
         if (this.$router) {
-          // console.log(`router.push(${to})`)
           this.$router.push(to)
         }
       }
