@@ -1,6 +1,6 @@
 <template>
   <div class="stories-view" append="tree">
-    <header></header>
+    <app-header></app-header>
     <list class="story-list" @loadmore="loadMoreStories" loadmoreoffset="50">
       <cell class="story-cell" v-for="story in stories" append="tree">
         <story :story="story"></story>
@@ -13,11 +13,11 @@
 </template>
 
 <script>
-  import Header from '../components/header.vue'
+  import AppHeader from '../components/app-header.vue'
   import Story from '../components/story.vue'
 
   export default {
-    components: { Header, Story },
+    components: { AppHeader, Story },
     props: {
       type: {
         type: String,

@@ -1,6 +1,6 @@
 <template>
   <div class="commont-view">
-    <header></header>
+    <app-header></app-header>
     <scroller>
       <div class="story-cell" v-if="story">
         <story class="comment-story" :story="story" no-comment="true"></story>
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-  import Header from '../components/header.vue'
+  import AppHeader from '../components/app-header.vue'
   import Story from '../components/story.vue'
   import Comment from '../components/comment.vue'
 
   export default {
-    components: { Header, Story, Comment },
+    components: { AppHeader, Story, Comment },
     data () {
       return {
         loading: true
