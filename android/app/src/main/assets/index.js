@@ -52,7 +52,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _router = __webpack_require__(4);
+	var _router = __webpack_require__(3);
 
 	var _router2 = _interopRequireDefault(_router);
 
@@ -94,12 +94,8 @@
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
-	/* styles */
-	__vue_styles__.push(__webpack_require__(2)
-	)
-
 	/* template */
-	var __vue_template__ = __webpack_require__(3)
+	var __vue_template__ = __webpack_require__(2)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -111,7 +107,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/App.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/App.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -128,18 +124,8 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	module.exports = {
-	  "view": {}
-	}
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
-	    staticClass: ["view"]
-	  }, [_h('router-view', {
+	  return _h('div', [_h('router-view', {
 	    staticStyle: {
 	      flex: "1"
 	    }
@@ -148,7 +134,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -157,15 +143,15 @@
 	  value: true
 	});
 
-	var _vueRouter = __webpack_require__(5);
+	var _vueRouter = __webpack_require__(4);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-	var _StoriesView = __webpack_require__(7);
+	var _StoriesView = __webpack_require__(6);
 
 	var _StoriesView2 = _interopRequireDefault(_StoriesView);
 
-	var _ArticleView = __webpack_require__(19);
+	var _ArticleView = __webpack_require__(18);
 
 	var _ArticleView2 = _interopRequireDefault(_ArticleView);
 
@@ -197,7 +183,7 @@
 	});
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2261,10 +2247,10 @@
 	}
 
 	module.exports = VueRouter;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -2450,21 +2436,21 @@
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(8)
+	__vue_styles__.push(__webpack_require__(7)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(9)
+	__vue_exports__ = __webpack_require__(8)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(18)
+	var __vue_template__ = __webpack_require__(17)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2476,7 +2462,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/StoriesView.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/StoriesView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -2490,7 +2476,7 @@
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2515,7 +2501,7 @@
 	}
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2524,11 +2510,11 @@
 	  value: true
 	});
 
-	var _header = __webpack_require__(10);
+	var _appHeader = __webpack_require__(9);
 
-	var _header2 = _interopRequireDefault(_header);
+	var _appHeader2 = _interopRequireDefault(_appHeader);
 
-	var _story = __webpack_require__(14);
+	var _story = __webpack_require__(13);
 
 	var _story2 = _interopRequireDefault(_story);
 
@@ -2550,7 +2536,7 @@
 	//
 
 	exports.default = {
-	  components: { Header: _header2.default, Story: _story2.default },
+	  components: { AppHeader: _appHeader2.default, Story: _story2.default },
 	  props: {
 	    type: {
 	      type: String,
@@ -2598,21 +2584,21 @@
 	};
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(11)
+	__vue_styles__.push(__webpack_require__(10)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(12)
+	__vue_exports__ = __webpack_require__(11)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(13)
+	var __vue_template__ = __webpack_require__(12)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2624,7 +2610,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/components/header.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/components/app-header.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -2638,7 +2624,7 @@
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2688,7 +2674,7 @@
 	}
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2733,7 +2719,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2803,21 +2789,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(15)
+	__vue_styles__.push(__webpack_require__(14)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(16)
+	__vue_exports__ = __webpack_require__(15)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(17)
+	var __vue_template__ = __webpack_require__(16)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2829,7 +2815,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/components/story.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/components/story.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -2843,7 +2829,7 @@
 
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2893,7 +2879,7 @@
 	}
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2991,7 +2977,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3041,20 +3027,31 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _h('div', {
-	    staticClass: ["stories-view"]
-	  }, [_h('header'), _h('list', {
+	    staticClass: ["stories-view"],
+	    appendAsTree: true,
+	    attrs: {
+	      "append": "tree"
+	    }
+	  }, [_h('app-header'), _h('list', {
 	    staticClass: ["story-list"],
+	    attrs: {
+	      "loadmoreoffset": "50"
+	    },
 	    on: {
 	      "loadmore": _vm.loadMoreStories
 	    }
 	  }, [_vm._l((_vm.stories), function(story) {
 	    return _h('cell', {
-	      staticClass: ["story-cell"]
+	      staticClass: ["story-cell"],
+	      appendAsTree: true,
+	      attrs: {
+	        "append": "tree"
+	      }
 	    }, [_h('story', {
 	      attrs: {
 	        "story": story
@@ -3069,11 +3066,15 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
+
+	/* styles */
+	__vue_styles__.push(__webpack_require__(19)
+	)
 
 	/* script */
 	__vue_exports__ = __webpack_require__(20)
@@ -3091,7 +3092,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/ArticleView.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/ArticleView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -3103,6 +3104,27 @@
 
 	module.exports = __vue_exports__
 
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "webview": {
+	    "flex": 1
+	  },
+	  "fixed-button": {
+	    "position": "absolute",
+	    "bottom": 50,
+	    "right": 50,
+	    "backgroundColor": "#FC6621",
+	    "borderRadius": 10,
+	    "width": 120,
+	    "padding": 15,
+	    "color": "#FFFFFF",
+	    "textAlign": "center"
+	  }
+	}
 
 /***/ },
 /* 20 */
@@ -3117,14 +3139,36 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 	exports.default = {
 	  computed: {
 	    url: function url() {
+	      var url = void 0;
 	      if (this.$route && this.$route.params) {
-	        return this.$route.params.url;
+	        url = this.$route.params.url;
+	        if (typeof url === 'string') {
+	          url = url.replace(/^http\:/, 'https:');
+	        }
+	        return url;
 	      }
-	      return 'http://www.alibaba.com/';
+	      return 'https://www.alibaba.com/';
+	    }
+	  },
+	  methods: {
+	    jump: function jump(to) {
+	      // console.log('jump to', to)
+	      if (this.$router) {
+	        // console.log(`router.push(${to})`)
+	        this.$router.push(to);
+	      }
 	    }
 	  }
 	};
@@ -3134,12 +3178,19 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('web', {
+	  return _h('div', [_h('web', {
 	    staticClass: ["webview"],
 	    attrs: {
 	      "src": _vm.url
 	    }
-	  })
+	  }), _h('text', {
+	    staticClass: ["fixed-button"],
+	    on: {
+	      "click": function($event) {
+	        _vm.jump("/")
+	      }
+	    }
+	  }, ["back"])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -3170,7 +3221,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/CommentView.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/CommentView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -3225,11 +3276,11 @@
 	  value: true
 	});
 
-	var _header = __webpack_require__(10);
+	var _appHeader = __webpack_require__(9);
 
-	var _header2 = _interopRequireDefault(_header);
+	var _appHeader2 = _interopRequireDefault(_appHeader);
 
-	var _story = __webpack_require__(14);
+	var _story = __webpack_require__(13);
 
 	var _story2 = _interopRequireDefault(_story);
 
@@ -3240,7 +3291,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	  components: { Header: _header2.default, Story: _story2.default, Comment: _comment2.default },
+	  components: { AppHeader: _appHeader2.default, Story: _story2.default, Comment: _comment2.default },
 	  data: function data() {
 	    return {
 	      loading: true
@@ -3346,7 +3397,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/components/comment.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/components/comment.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -3397,8 +3448,7 @@
 	  },
 	  "comment-btn": {
 	    "position": "absolute",
-	    "fontFamily": "Consolas, \"Liberation Mono\", Menlo, Courier, monospace",
-	    "left": -50
+	    "fontFamily": "Consolas, \"Liberation Mono\", Menlo, Courier, monospace"
 	  },
 	  "comment-title": {
 	    "fontSize": 26,
@@ -4514,10 +4564,7 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return (_vm.comment) ? _h('div', {
-	    class: _vm.className,
-	    style: {
-	      marginLeft: _vm.indent
-	    }
+	    class: _vm.className
 	  }, [(_vm.collapsed) ? _h('text', {
 	    staticClass: ["small-text", "comment-btn"],
 	    on: {
@@ -4533,7 +4580,10 @@
 	      }
 	    }
 	  }, ["[-]"]), _h('div', {
-	    staticClass: ["text-group"]
+	    staticClass: ["text-group"],
+	    style: {
+	      marginLeft: _vm.indent
+	    }
 	  }, [_h('text', {
 	    staticClass: ["text-cell", "small-text"]
 	  }, ["by "]), _h('div', {
@@ -4550,7 +4600,10 @@
 	  }, [" | " + _vm._s(_vm._f("timeAgo")(_vm.comment.time)) + " ago"]), _h('text', {
 	    staticClass: ["text-cell", "small-text"]
 	  }, [_vm._s(_vm.collapsed ? '  (collapsed)' : '')])]), (!_vm.collapsed) ? _h('div', {
-	    staticClass: ["comment-inner"]
+	    staticClass: ["comment-inner"],
+	    style: {
+	      marginLeft: _vm.indent
+	    }
 	  }, [_h('text', {
 	    staticClass: ["comment-title"]
 	  }, [_vm._s(_vm._f("unescape")(_vm.comment.text))]), _h('div', {
@@ -4573,7 +4626,7 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _h('div', {
 	    staticClass: ["commont-view"]
-	  }, [_h('header'), _h('scroller', [(_vm.story) ? _h('div', {
+	  }, [_h('app-header'), _h('scroller', [(_vm.story) ? _h('div', {
 	    staticClass: ["story-cell"]
 	  }, [_h('story', {
 	    staticClass: ["comment-story"],
@@ -4626,7 +4679,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/UserView.vue"
+	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/UserView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -4682,14 +4735,14 @@
 	  value: true
 	});
 
-	var _header = __webpack_require__(10);
+	var _appHeader = __webpack_require__(9);
 
-	var _header2 = _interopRequireDefault(_header);
+	var _appHeader2 = _interopRequireDefault(_appHeader);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	  components: { Header: _header2.default },
+	  components: { AppHeader: _appHeader2.default },
 	  computed: {
 	    userId: function userId() {
 	      if (this.$route && this.$route.params) {
@@ -4730,7 +4783,7 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _h('div', {
 	    staticClass: ["user-view"]
-	  }, [_h('header'), _h('div', {
+	  }, [_h('app-header'), _h('div', {
 	    staticClass: ["user-info"]
 	  }, [_h('text', {
 	    staticClass: ["user-name"]
