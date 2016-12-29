@@ -5,9 +5,9 @@
 
     <div class="text-group">
       <text class="text-cell small-text">by&nbsp;</text>
-      <router-link class="text-cell" :to="`/user/${comment.by}`">
+      <div class="text-cell" @click="jump(`/user/${comment.by}`)">
         <text class="small-text link">{{comment.by}}</text>
-      </router-link>
+      </div>
       <text class="text-cell small-text"> | {{ comment.time | timeAgo }} ago</text>
       <text class="text-cell small-text">{{ collapsed ? '  (collapsed)' : '' }}</text>
     </div>
@@ -59,6 +59,13 @@
     methods: {
       toggle (state) {
         this.collapsed = (state === undefined) ? !this.collapsed : state
+      },
+      jump (to) {
+        // console.log('jump to', to)
+        if (this.$router) {
+          // console.log(`router.push(${to})`)
+          this.$router.push(to)
+        }
       }
     }
   }
