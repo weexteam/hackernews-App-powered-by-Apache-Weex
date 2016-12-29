@@ -16,7 +16,7 @@
       <div class="link" @click="jump('/ask')">
         <text class="title">Ask</text>
       </div>
-      <div class="link"  @click="jump('/job')">
+      <div class="link" @click="jump('/job')">
         <text class="title">Job</text>
       </div>
     </div>
