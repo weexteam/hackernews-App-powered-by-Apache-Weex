@@ -1,7 +1,7 @@
 <template>
   <div class="stories-view" append="tree">
     <header></header>
-    <list class="story-list" @loadmore="loadMoreStories">
+    <list class="story-list" @loadmore="loadMoreStories" loadmoreoffset="50">
       <cell class="story-cell" v-for="story in stories" append="tree">
         <story :story="story"></story>
       </cell>
