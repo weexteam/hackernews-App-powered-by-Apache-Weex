@@ -137,9 +137,13 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('router-view', {
+	  return _h('div', {
 	    staticClass: ["view"]
-	  })
+	  }, [_h('router-view', {
+	    staticStyle: {
+	      flex: "1"
+	    }
+	  })])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -2721,9 +2725,7 @@
 	exports.default = {
 	  methods: {
 	    jump: function jump(to) {
-	      // console.log('jump to', to)
 	      if (this.$router) {
-	        // console.log(`router.push(${to})`)
 	        this.$router.push(to);
 	      }
 	    }
@@ -2769,24 +2771,30 @@
 	    }
 	  }, [_h('text', {
 	    staticClass: ["title"]
-	  }, ["New"])]), _h('router-link', {
+	  }, ["New"])]), _h('div', {
 	    staticClass: ["link"],
-	    attrs: {
-	      "to": "/show"
+	    on: {
+	      "click": function($event) {
+	        _vm.jump('/show')
+	      }
 	    }
 	  }, [_h('text', {
 	    staticClass: ["title"]
-	  }, ["Show"])]), _h('router-link', {
+	  }, ["Show"])]), _h('div', {
 	    staticClass: ["link"],
-	    attrs: {
-	      "to": "/ask"
+	    on: {
+	      "click": function($event) {
+	        _vm.jump('/ask')
+	      }
 	    }
 	  }, [_h('text', {
 	    staticClass: ["title"]
-	  }, ["Ask"])]), _h('router-link', {
+	  }, ["Ask"])]), _h('div', {
 	    staticClass: ["link"],
-	    attrs: {
-	      "to": "/job"
+	    on: {
+	      "click": function($event) {
+	        _vm.jump('/job')
+	      }
 	    }
 	  }, [_h('text', {
 	    staticClass: ["title"]
@@ -2972,6 +2980,13 @@
 	      type: [String, Boolean],
 	      default: false
 	    }
+	  },
+	  methods: {
+	    jump: function jump(to) {
+	      if (this.$router) {
+	        this.$router.push(to);
+	      }
+	    }
 	  }
 	};
 
@@ -2984,10 +2999,12 @@
 	    staticClass: ["cell-item"]
 	  }, [_h('text', {
 	    staticClass: ["story-score"]
-	  }, [_vm._s(_vm.story.score)]), _h('router-link', {
+	  }, [_vm._s(_vm.story.score)]), _h('div', {
 	    staticClass: ["story-link"],
-	    attrs: {
-	      "to": ("/article/" + (_vm.story.url))
+	    on: {
+	      "click": function($event) {
+	        _vm.jump(("/article/" + (_vm.story.url)))
+	      }
 	    }
 	  }, [_h('text', {
 	    staticClass: ["story-title"]
@@ -2997,10 +3014,12 @@
 	    staticClass: ["text-group"]
 	  }, [_h('text', {
 	    staticClass: ["small-text", "text-cell"]
-	  }, ["by "]), _h('router-link', {
+	  }, ["by "]), _h('div', {
 	    staticClass: ["text-cell"],
-	    attrs: {
-	      "to": ("/user/" + (_vm.story.by))
+	    on: {
+	      "click": function($event) {
+	        _vm.jump(("/user/" + (_vm.story.by)))
+	      }
 	    }
 	  }, [_h('text', {
 	    staticClass: ["small-text", "link-text"]
@@ -3008,10 +3027,12 @@
 	    staticClass: ["small-text", "text-cell"]
 	  }, [" | " + _vm._s(_vm._f("timeAgo")(_vm.story.time)) + " ago"]), (!_vm.noComment) ? _h('text', {
 	    staticClass: ["small-text", "text-cell"]
-	  }, [" | "]) : _vm._e(), (!_vm.noComment) ? _h('router-link', {
+	  }, [" | "]) : _vm._e(), (!_vm.noComment) ? _h('div', {
 	    staticClass: ["text-cell"],
-	    attrs: {
-	      "to": ("/item/" + (_vm.story.id))
+	    on: {
+	      "click": function($event) {
+	        _vm.jump(("/item/" + (_vm.story.id)))
+	      }
 	    }
 	  }, [_h('text', {
 	    staticClass: ["small-text", "link-text"]
@@ -3437,6 +3458,11 @@
 	  methods: {
 	    toggle: function toggle(state) {
 	      this.collapsed = state === undefined ? !this.collapsed : state;
+	    },
+	    jump: function jump(to) {
+	      if (this.$router) {
+	        this.$router.push(to);
+	      }
 	    }
 	  }
 	}; //
@@ -4413,7 +4439,7 @@
 	      type: 'json'
 	    }, function (response) {
 	      // console.log('----------> response.status: ' + response.status)
-	      if (response.status === 200) {
+	      if (response.status == 200) {
 	        resolve(response.data);
 	      } else {
 	        reject(response);
@@ -4510,10 +4536,12 @@
 	    staticClass: ["text-group"]
 	  }, [_h('text', {
 	    staticClass: ["text-cell", "small-text"]
-	  }, ["by "]), _h('router-link', {
+	  }, ["by "]), _h('div', {
 	    staticClass: ["text-cell"],
-	    attrs: {
-	      "to": ("/user/" + (_vm.comment.by))
+	    on: {
+	      "click": function($event) {
+	        _vm.jump(("/user/" + (_vm.comment.by)))
+	      }
 	    }
 	  }, [_h('text', {
 	    staticClass: ["small-text", "link"]

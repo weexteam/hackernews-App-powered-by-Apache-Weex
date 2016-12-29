@@ -1,20 +1,20 @@
 <template>
   <div class="cell-item">
     <text class="story-score">{{story.score}}</text>
-    <router-link :to="`/article/${story.url}`" class="story-link">
+    <div @click="jump(`/article/${story.url}`)" class="story-link">
       <text class="story-title">{{story.title}}</text>
       <text class="small-text" v-if="story.url">({{ story.url | host }})</text>
-    </router-link>
+    </div>
     <div class="text-group">
       <text class="small-text text-cell">by </text>
-      <router-link class="text-cell" :to="`/user/${story.by}`">
+      <div class="text-cell" @click="jump(`/user/${story.by}`)">
         <text class="small-text link-text">{{story.by}}</text>
-      </router-link>
+      </div>
       <text class="small-text text-cell"> | {{ story.time | timeAgo }} ago</text>
       <text class="small-text text-cell" v-if="!noComment"> | </text>
-      <router-link class="text-cell" :to="`/item/${story.id}`" v-if="!noComment">
+      <div class="text-cell" @click="jump(`/item/${story.id}`)" v-if="!noComment">
         <text class="small-text link-text">{{ story.descendants }} comments</text>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -76,6 +76,13 @@
       'no-comment': {
         type: [String, Boolean],
         default: false
+      }
+    },
+    methods: {
+      jump (to) {
+        if (this.$router) {
+          this.$router.push(to)
+        }
       }
     }
   }

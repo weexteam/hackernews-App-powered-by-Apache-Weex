@@ -10,15 +10,15 @@
       <div class="link" @click="jump('/new')">
         <text class="title">New</text>
       </div>
-      <router-link class="link" to="/show">
+      <div class="link" @click="jump('/show')">
         <text class="title">Show</text>
-      </router-link>
-      <router-link class="link" to="/ask">
+      </div>
+      <div class="link" @click="jump('/ask')">
         <text class="title">Ask</text>
-      </router-link>
-      <router-link class="link" to="/job">
+      </div>
+      <div class="link"  @click="jump('/job')">
         <text class="title">Job</text>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -27,9 +27,7 @@
   export default {
     methods: {
       jump (to) {
-        // console.log('jump to', to)
         if (this.$router) {
-          // console.log(`router.push(${to})`)
           this.$router.push(to)
         }
       }
