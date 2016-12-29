@@ -3894,7 +3894,7 @@ var nextTick = (function () {
   // completely stops working after triggering a few times... so, if native
   // Promise is available, we will use it:
   /* istanbul ignore if */
-  const useSetTimeoutByForce = true
+  var useSetTimeoutByForce = true;
   if (!useSetTimeoutByForce && typeof Promise !== 'undefined' && isNative(Promise)) {
     var p = Promise.resolve();
     var logError = function (err) { console.error(err); };
