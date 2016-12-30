@@ -1,18 +1,18 @@
 <template>
-  <div :class="className" :style="{ marginLeft: indent }" v-if="comment">
+  <div :class="className" v-if="comment">
     <text class="small-text comment-btn" @click="toggle(false)" v-if="collapsed">[+]</text>
     <text class="small-text comment-btn" @click="toggle(true)" v-else>[-]</text>
 
-    <div class="text-group">
+    <div class="text-group" :style="{ marginLeft: indent }">
       <text class="text-cell small-text">by&nbsp;</text>
-      <router-link class="text-cell" :to="`/user/${comment.by}`">
+      <div class="text-cell" @click="jump(`/user/${comment.by}`)">
         <text class="small-text link">{{comment.by}}</text>
-      </router-link>
+      </div>
       <text class="text-cell small-text"> | {{ comment.time | timeAgo }} ago</text>
       <text class="text-cell small-text">{{ collapsed ? '  (collapsed)' : '' }}</text>
     </div>
 
-    <div class="comment-inner" v-if="!collapsed">
+    <div class="comment-inner" :style="{ marginLeft: indent }" v-if="!collapsed">
       <text class="comment-title">{{comment.text | unescape }}</text>
       <div class="comment-list">
         <comment v-for="id in comment.kids" :id="id" :depth="depth + 1"></comment>
@@ -59,6 +59,11 @@
     methods: {
       toggle (state) {
         this.collapsed = (state === undefined) ? !this.collapsed : state
+      },
+      jump (to) {
+        if (this.$router) {
+          this.$router.push(to)
+        }
       }
     }
   }
@@ -99,7 +104,7 @@
   .comment-btn {
     position: absolute;
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    left: -50px;
+    /*left: -50px;*/
   }
   .comment-title {
     font-size: 26px;

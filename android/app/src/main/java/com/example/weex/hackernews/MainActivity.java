@@ -1,27 +1,30 @@
 package com.example.weex.hackernews;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 
 import com.taobao.weex.IWXRenderListener;
 import com.taobao.weex.WXSDKInstance;
-import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.utils.WXFileUtils;
 
-public class MainActivity extends AppCompatActivity implements IWXRenderListener {
+public class MainActivity extends Activity implements IWXRenderListener {
 
     WXSDKInstance mWXSDKInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
 
         mWXSDKInstance = new WXSDKInstance(this);
         mWXSDKInstance.registerRenderListener(this);
 
-        mWXSDKInstance.render("WXSample", WXFileUtils.loadAsset("index.js", this), null, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
+        mWXSDKInstance.render(WXFileUtils.loadAsset("index.js", this));
     }
 
     @Override

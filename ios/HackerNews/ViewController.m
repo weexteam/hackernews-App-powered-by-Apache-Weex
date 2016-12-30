@@ -26,8 +26,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _weexHeight = self.view.frame.size.height - 64;
+    _weexHeight = self.view.frame.size.height - 20;
     [self.navigationController.navigationBar setHidden:YES];
+
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = [UIColor colorWithRed:1.00 green:0.40 blue:0.00 alpha:1.0];
+    }
+
     [self render];
 }
 
@@ -41,7 +49,7 @@
     _instance = [[WXSDKInstance alloc] init];
     _instance.viewController = self;
     CGFloat width = self.view.frame.size.width;
-    _instance.frame = CGRectMake(self.view.frame.size.width-width, 0, width, _weexHeight);
+    _instance.frame = CGRectMake(self.view.frame.size.width-width, 20, width, _weexHeight);
     
     __weak typeof(self) weakSelf = self;
     _instance.onCreate = ^(UIView *view) {
@@ -64,6 +72,10 @@
     NSString *url = [NSString stringWithFormat:@"file://%@/index.js",[NSBundle mainBundle].bundlePath];
     
     [_instance renderWithURL:[NSURL URLWithString:url] options:@{@"bundleUrl":url} data:nil];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {

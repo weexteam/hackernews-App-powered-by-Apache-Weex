@@ -7170,6 +7170,10 @@ function insertBefore (node, target, before) {
 }
 
 function removeChild (node, child) {
+  if (child.nodeType === 3) {
+    child.parentNode.setAttr('value', '')
+    return
+  }
   node.removeChild(child);
 }
 
