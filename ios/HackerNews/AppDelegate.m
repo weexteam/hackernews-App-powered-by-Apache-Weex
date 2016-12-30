@@ -34,6 +34,7 @@
     [WXLog setLogLevel:WXLogLevelLog];
     
     [WXSDKEngine registerModule:@"event" withClass:NSClassFromString(@"WXEventModule")];
+    [WXSDKEngine registerHandler:[WXImgLoaderDefaultImpl new] withProtocol:@protocol(WXImgLoaderProtocol)];
 
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
