@@ -18,11 +18,6 @@
         else {
           window.open(this.url)
         }
-      },
-      jump (to) {
-        if (this.$router) {
-          this.$router.push(to)
-        }
       }
     }
   }

@@ -6,7 +6,7 @@
         <story class="comment-story" :story="story" no-comment="true"></story>
       </div>
       <div class="comments-box" v-if="story && story.kids">
-        <text class="comment-count" v-if="story.kids.length">{{story.kids.length}} comments</text>
+        <text class="comment-count" v-if="story.descendants">{{story.descendants}} comments</text>
         <text class="comment-count" v-else>no comments</text>
         <div class="comment-list">
           <comment v-for="id in story.kids" :id="id"></comment>
@@ -66,7 +66,6 @@
     },
 
     created () {
-      // console.log(this.$store)
       this.fetchItemAndComments().then(() => {
         this.loading = false
       })
@@ -88,7 +87,6 @@
   .comments-box {
     margin-top: 20px;
     background-color: #FFFFFF;
-    /*padding-top: 20px;*/
     padding-left: 35px;
     padding-right: 35px;
   }
@@ -96,7 +94,6 @@
     font-size: 36px;
     padding-top: 30px;
     padding-bottom: 30px;
-    /* padding-left: 20px; */
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: #EEEEEE;

@@ -59,11 +59,6 @@
     methods: {
       toggle (state) {
         this.collapsed = (state === undefined) ? !this.collapsed : state
-      },
-      jump (to) {
-        if (this.$router) {
-          this.$router.push(to)
-        }
       }
     }
   }
@@ -104,7 +99,6 @@
   .comment-btn {
     position: absolute;
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    /*left: -50px;*/
   }
   .comment-title {
     font-size: 26px;

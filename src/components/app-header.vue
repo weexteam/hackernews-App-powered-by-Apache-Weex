@@ -23,18 +23,6 @@
   </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      jump (to) {
-        if (this.$router) {
-          this.$router.push(to)
-        }
-      }
-    }
-  }
-</script>
-
 <style scoped>
   .header {
     position: relative;

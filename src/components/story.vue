@@ -80,13 +80,6 @@
         type: [String, Boolean],
         default: false
       }
-    },
-    methods: {
-      jump (to) {
-        if (this.$router) {
-          this.$router.push(to)
-        }
-      }
     }
   }
 </script>
