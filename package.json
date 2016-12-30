@@ -2,7 +2,6 @@
   "name": "weex-hackernews",
   "version": "0.0.1",
   "description": "Weex HackerNews App, powered by Vue 2.x.",
-  "private": true,
   "main": "index.js",
   "keywords": [
     "weex",
@@ -45,6 +44,7 @@
     "vue-loader": "^10.0.2",
     "vue-template-compiler": "^2.1.7",
     "webpack": "^1.14.0",
-    "weex-loader": "^0.4.0"
+    "weex-loader": "^0.4.0",
+    "weex-vue-loader": "^0.2.3"
   }
 }
