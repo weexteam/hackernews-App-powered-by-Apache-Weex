@@ -25,6 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // [_instance fireGlobalEvent:@"" params:@{}];
     // Do any additional setup after loading the view, typically from a nib.
     _weexHeight = self.view.frame.size.height - 20;
     [self.navigationController.navigationBar setHidden:YES];
