@@ -358,4 +358,7 @@ public class WXSDKManager {
   }
 
 
+  public void postOnUiThread(Runnable runnable) {
+    mWXRenderManager.postOnUiThread(WXThread.secure(runnable), 0);
+  }
 }
