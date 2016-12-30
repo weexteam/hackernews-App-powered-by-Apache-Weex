@@ -1,6 +1,6 @@
 <template>
   <div>
-    <web class="webview" :src="url"></web>
+    <web class="webview" :src="url | https"></web>
     <text class="fixed-button" @click="jump(`/`)">back</text>
   </div>
 </template>
@@ -26,13 +26,8 @@
   export default {
     computed: {
       url () {
-        let url
         if (this.$route && this.$route.params) {
-          url = this.$route.params.url
-          if (typeof url === 'string') {
-            url = url.replace(/^http\:/, 'https:')
-          }
-          return url
+          return this.$route.params.url
         }
         return 'https://www.alibaba.com/'
       }

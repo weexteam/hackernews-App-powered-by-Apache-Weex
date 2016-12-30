@@ -6,6 +6,13 @@ export function host (url) {
   return parts.join('.')
 }
 
+export function https (url) {
+  if (WXEnvironment.platform === 'iOS' && typeof url === 'string') {
+    return url.replace(/^http\:/, 'https:')
+  }
+  return ''
+}
+
 export function timeAgo (time) {
   const between = Date.now() / 1000 - Number(time)
   if (between < 3600) {
