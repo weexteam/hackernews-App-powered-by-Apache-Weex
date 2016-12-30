@@ -52,17 +52,17 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _router = __webpack_require__(3);
+	var _router = __webpack_require__(4);
 
 	var _router2 = _interopRequireDefault(_router);
 
-	var _store = __webpack_require__(31);
+	var _store = __webpack_require__(32);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _vuexRouterSync = __webpack_require__(42);
+	var _vuexRouterSync = __webpack_require__(43);
 
-	var _filters = __webpack_require__(43);
+	var _filters = __webpack_require__(44);
 
 	var filters = _interopRequireWildcard(_filters);
 
@@ -94,8 +94,11 @@
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
+	/* script */
+	__vue_exports__ = __webpack_require__(2)
+
 	/* template */
-	var __vue_template__ = __webpack_require__(2)
+	var __vue_template__ = __webpack_require__(3)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -124,8 +127,36 @@
 /* 2 */
 /***/ function(module, exports) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+
+	exports.default = {
+	  methods: {
+	    back: function back() {
+	      this.$router.back();
+	    }
+	  }
+	};
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', [_h('router-view', {
+	  return _h('div', {
+	    on: {
+	      "androidback": _vm.back
+	    }
+	  }, [_h('router-view', {
 	    staticStyle: {
 	      flex: "1"
 	    }
@@ -134,7 +165,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -143,23 +174,23 @@
 	  value: true
 	});
 
-	var _vueRouter = __webpack_require__(4);
+	var _vueRouter = __webpack_require__(5);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-	var _StoriesView = __webpack_require__(6);
+	var _StoriesView = __webpack_require__(7);
 
 	var _StoriesView2 = _interopRequireDefault(_StoriesView);
 
-	var _ArticleView = __webpack_require__(21);
+	var _ArticleView = __webpack_require__(22);
 
 	var _ArticleView2 = _interopRequireDefault(_ArticleView);
 
-	var _CommentView = __webpack_require__(25);
+	var _CommentView = __webpack_require__(26);
 
 	var _CommentView2 = _interopRequireDefault(_CommentView);
 
-	var _UserView = __webpack_require__(38);
+	var _UserView = __webpack_require__(39);
 
 	var _UserView2 = _interopRequireDefault(_UserView);
 
@@ -183,7 +214,7 @@
 	});
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2247,10 +2278,10 @@
 	}
 
 	module.exports = VueRouter;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -2436,21 +2467,21 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(7)
+	__vue_styles__.push(__webpack_require__(8)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(8)
+	__vue_exports__ = __webpack_require__(9)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(20)
+	var __vue_template__ = __webpack_require__(21)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2476,7 +2507,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2501,7 +2532,7 @@
 	}
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2510,11 +2541,11 @@
 	  value: true
 	});
 
-	var _appHeader = __webpack_require__(9);
+	var _appHeader = __webpack_require__(10);
 
 	var _appHeader2 = _interopRequireDefault(_appHeader);
 
-	var _story = __webpack_require__(13);
+	var _story = __webpack_require__(14);
 
 	var _story2 = _interopRequireDefault(_story);
 
@@ -2584,21 +2615,21 @@
 	};
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(10)
+	__vue_styles__.push(__webpack_require__(11)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(11)
+	__vue_exports__ = __webpack_require__(12)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(12)
+	var __vue_template__ = __webpack_require__(13)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2624,7 +2655,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2674,7 +2705,7 @@
 	}
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2719,7 +2750,7 @@
 	};
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2789,21 +2820,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(14)
+	__vue_styles__.push(__webpack_require__(15)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(15)
+	__vue_exports__ = __webpack_require__(16)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(19)
+	var __vue_template__ = __webpack_require__(20)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2829,7 +2860,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2879,7 +2910,7 @@
 	}
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2888,7 +2919,7 @@
 	  value: true
 	});
 
-	var _externalLink = __webpack_require__(16);
+	var _externalLink = __webpack_require__(17);
 
 	var _externalLink2 = _interopRequireDefault(_externalLink);
 
@@ -2983,17 +3014,17 @@
 	//
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* script */
-	__vue_exports__ = __webpack_require__(17)
+	__vue_exports__ = __webpack_require__(18)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(18)
+	var __vue_template__ = __webpack_require__(19)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3019,7 +3050,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3056,7 +3087,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3069,7 +3100,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3117,7 +3148,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3156,21 +3187,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(22)
+	__vue_styles__.push(__webpack_require__(23)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(23)
+	__vue_exports__ = __webpack_require__(24)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(24)
+	var __vue_template__ = __webpack_require__(25)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3196,7 +3227,7 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -3217,7 +3248,7 @@
 	}
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3264,7 +3295,7 @@
 	};
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3285,21 +3316,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(26)
+	__vue_styles__.push(__webpack_require__(27)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(27)
+	__vue_exports__ = __webpack_require__(28)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(37)
+	var __vue_template__ = __webpack_require__(38)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3325,7 +3356,7 @@
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -3357,7 +3388,7 @@
 	}
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3366,15 +3397,15 @@
 	  value: true
 	});
 
-	var _appHeader = __webpack_require__(9);
+	var _appHeader = __webpack_require__(10);
 
 	var _appHeader2 = _interopRequireDefault(_appHeader);
 
-	var _story = __webpack_require__(13);
+	var _story = __webpack_require__(14);
 
 	var _story2 = _interopRequireDefault(_story);
 
-	var _comment = __webpack_require__(28);
+	var _comment = __webpack_require__(29);
 
 	var _comment2 = _interopRequireDefault(_comment);
 
@@ -3461,21 +3492,21 @@
 	//
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(29)
+	__vue_styles__.push(__webpack_require__(30)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(30)
+	__vue_exports__ = __webpack_require__(31)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(36)
+	var __vue_template__ = __webpack_require__(37)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3501,7 +3532,7 @@
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -3547,7 +3578,7 @@
 	}
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3556,7 +3587,7 @@
 	  value: true
 	});
 
-	var _store = __webpack_require__(31);
+	var _store = __webpack_require__(32);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -3630,7 +3661,7 @@
 	//
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3639,15 +3670,15 @@
 	  value: true
 	});
 
-	var _vuex = __webpack_require__(32);
+	var _vuex = __webpack_require__(33);
 
 	var _vuex2 = _interopRequireDefault(_vuex);
 
-	var _actions = __webpack_require__(33);
+	var _actions = __webpack_require__(34);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _mutations = __webpack_require__(35);
+	var _mutations = __webpack_require__(36);
 
 	var mutations = _interopRequireWildcard(_mutations);
 
@@ -3711,7 +3742,7 @@
 	exports.default = store;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4477,7 +4508,7 @@
 	})));
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4491,7 +4522,7 @@
 	exports.FETCH_ITEMS = FETCH_ITEMS;
 	exports.FETCH_USER = FETCH_USER;
 
-	var _fetch = __webpack_require__(34);
+	var _fetch = __webpack_require__(35);
 
 	var LOAD_MORE_STEP = 10;
 
@@ -4554,7 +4585,7 @@
 	}
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4607,7 +4638,7 @@
 	}
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4649,7 +4680,7 @@
 	}
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -4710,7 +4741,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -4743,21 +4774,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(39)
+	__vue_styles__.push(__webpack_require__(40)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(40)
+	__vue_exports__ = __webpack_require__(41)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(41)
+	var __vue_template__ = __webpack_require__(42)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -4783,7 +4814,7 @@
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -4816,7 +4847,7 @@
 	}
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4825,7 +4856,7 @@
 	  value: true
 	});
 
-	var _appHeader = __webpack_require__(9);
+	var _appHeader = __webpack_require__(10);
 
 	var _appHeader2 = _interopRequireDefault(_appHeader);
 
@@ -4867,7 +4898,7 @@
 	//
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -4894,7 +4925,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	exports.sync = function (store, router, options) {
@@ -4955,7 +4986,7 @@
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
