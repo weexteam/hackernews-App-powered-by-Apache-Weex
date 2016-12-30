@@ -56,15 +56,19 @@
 
 	var _router2 = _interopRequireDefault(_router);
 
-	var _store = __webpack_require__(32);
+	var _store = __webpack_require__(31);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _vuexRouterSync = __webpack_require__(43);
+	var _vuexRouterSync = __webpack_require__(42);
 
-	var _filters = __webpack_require__(44);
+	var _filters = __webpack_require__(43);
 
 	var filters = _interopRequireWildcard(_filters);
+
+	var _mixins = __webpack_require__(44);
+
+	var _mixins2 = _interopRequireDefault(_mixins);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -72,13 +76,16 @@
 
 	// sync the router with the vuex store.
 	// this registers `store.state.route`
+	// import Vue from 'vue'
 	(0, _vuexRouterSync.sync)(_store2.default, _router2.default);
 
 	// register global utility filters.
-	// import Vue from 'vue'
 	Object.keys(filters).forEach(function (key) {
 	  Vue.filter(key, filters[key]);
 	});
+
+	// register global mixins.
+	Vue.mixin(_mixins2.default);
 
 	// create the app instance.
 	// here we inject the router and store to all child components,
@@ -110,7 +117,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/App.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/App.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -182,15 +189,15 @@
 
 	var _StoriesView2 = _interopRequireDefault(_StoriesView);
 
-	var _ArticleView = __webpack_require__(22);
+	var _ArticleView = __webpack_require__(21);
 
 	var _ArticleView2 = _interopRequireDefault(_ArticleView);
 
-	var _CommentView = __webpack_require__(26);
+	var _CommentView = __webpack_require__(25);
 
 	var _CommentView2 = _interopRequireDefault(_CommentView);
 
-	var _UserView = __webpack_require__(39);
+	var _UserView = __webpack_require__(38);
 
 	var _UserView2 = _interopRequireDefault(_UserView);
 
@@ -2481,7 +2488,7 @@
 	__vue_exports__ = __webpack_require__(9)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(21)
+	var __vue_template__ = __webpack_require__(20)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2493,7 +2500,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/StoriesView.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/StoriesView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -2545,7 +2552,7 @@
 
 	var _appHeader2 = _interopRequireDefault(_appHeader);
 
-	var _story = __webpack_require__(14);
+	var _story = __webpack_require__(13);
 
 	var _story2 = _interopRequireDefault(_story);
 
@@ -2625,11 +2632,8 @@
 	__vue_styles__.push(__webpack_require__(11)
 	)
 
-	/* script */
-	__vue_exports__ = __webpack_require__(12)
-
 	/* template */
-	var __vue_template__ = __webpack_require__(13)
+	var __vue_template__ = __webpack_require__(12)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2641,7 +2645,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/components/app-header.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/components/app-header.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -2706,51 +2710,6 @@
 
 /***/ },
 /* 12 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	exports.default = {
-	  methods: {
-	    jump: function jump(to) {
-	      if (this.$router) {
-	        this.$router.push(to);
-	      }
-	    }
-	  }
-	};
-
-/***/ },
-/* 13 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2820,21 +2779,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(15)
+	__vue_styles__.push(__webpack_require__(14)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(16)
+	__vue_exports__ = __webpack_require__(15)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(20)
+	var __vue_template__ = __webpack_require__(19)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2846,7 +2805,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/components/story.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/components/story.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -2860,7 +2819,7 @@
 
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -2910,7 +2869,7 @@
 	}
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2919,7 +2878,7 @@
 	  value: true
 	});
 
-	var _externalLink = __webpack_require__(17);
+	var _externalLink = __webpack_require__(16);
 
 	var _externalLink2 = _interopRequireDefault(_externalLink);
 
@@ -2935,13 +2894,6 @@
 	    'no-comment': {
 	      type: [String, Boolean],
 	      default: false
-	    }
-	  },
-	  methods: {
-	    jump: function jump(to) {
-	      if (this.$router) {
-	        this.$router.push(to);
-	      }
 	    }
 	  }
 	}; //
@@ -3014,17 +2966,17 @@
 	//
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* script */
-	__vue_exports__ = __webpack_require__(18)
+	__vue_exports__ = __webpack_require__(17)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(19)
+	var __vue_template__ = __webpack_require__(18)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3036,7 +2988,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/components/external-link.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/components/external-link.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -3050,7 +3002,7 @@
 
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3077,17 +3029,12 @@
 	      } else {
 	        window.open(this.url);
 	      }
-	    },
-	    jump: function jump(to) {
-	      if (this.$router) {
-	        this.$router.push(to);
-	      }
 	    }
 	  }
 	};
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3100,7 +3047,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3148,7 +3095,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3187,21 +3134,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(23)
+	__vue_styles__.push(__webpack_require__(22)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(24)
+	__vue_exports__ = __webpack_require__(23)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(25)
+	var __vue_template__ = __webpack_require__(24)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3213,7 +3160,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/ArticleView.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/ArticleView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -3227,7 +3174,7 @@
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -3248,7 +3195,7 @@
 	}
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3268,41 +3215,39 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 	exports.default = {
 	  computed: {
 	    url: function url() {
-	      var url = void 0;
 	      if (this.$route && this.$route.params) {
-	        url = this.$route.params.url;
-	        if (typeof url === 'string') {
-	          url = url.replace(/^http\:/, 'https:');
-	        }
-	        return url;
+	        return this.$route.params.url;
 	      }
 	      return 'https://www.alibaba.com/';
-	    }
-	  },
-	  methods: {
-	    jump: function jump(to) {
-	      // console.log('jump to', to)
-	      if (this.$router) {
-	        // console.log(`router.push(${to})`)
-	        this.$router.push(to);
-	      }
 	    }
 	  }
 	};
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _h('div', [_h('web', {
 	    staticClass: ["webview"],
 	    attrs: {
-	      "src": _vm.url
+	      "src": _vm._f("https")(_vm.url)
 	    }
 	  }), _h('text', {
 	    staticClass: ["fixed-button"],
@@ -3316,21 +3261,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(27)
+	__vue_styles__.push(__webpack_require__(26)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(28)
+	__vue_exports__ = __webpack_require__(27)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(38)
+	var __vue_template__ = __webpack_require__(37)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3342,7 +3287,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/CommentView.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/CommentView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -3356,7 +3301,7 @@
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -3388,7 +3333,7 @@
 	}
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3401,11 +3346,11 @@
 
 	var _appHeader2 = _interopRequireDefault(_appHeader);
 
-	var _story = __webpack_require__(14);
+	var _story = __webpack_require__(13);
 
 	var _story2 = _interopRequireDefault(_story);
 
-	var _comment = __webpack_require__(29);
+	var _comment = __webpack_require__(28);
 
 	var _comment2 = _interopRequireDefault(_comment);
 
@@ -3467,7 +3412,6 @@
 	  created: function created() {
 	    var _this3 = this;
 
-	    // console.log(this.$store)
 	    this.fetchItemAndComments().then(function () {
 	      _this3.loading = false;
 	    });
@@ -3492,21 +3436,21 @@
 	//
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(30)
+	__vue_styles__.push(__webpack_require__(29)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(31)
+	__vue_exports__ = __webpack_require__(30)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(37)
+	var __vue_template__ = __webpack_require__(36)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -3518,7 +3462,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/components/comment.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/components/comment.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -3532,7 +3476,7 @@
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -3578,7 +3522,7 @@
 	}
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3587,7 +3531,7 @@
 	  value: true
 	});
 
-	var _store = __webpack_require__(32);
+	var _store = __webpack_require__(31);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -3629,11 +3573,6 @@
 	  methods: {
 	    toggle: function toggle(state) {
 	      this.collapsed = state === undefined ? !this.collapsed : state;
-	    },
-	    jump: function jump(to) {
-	      if (this.$router) {
-	        this.$router.push(to);
-	      }
 	    }
 	  }
 	}; //
@@ -3661,7 +3600,7 @@
 	//
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3670,15 +3609,15 @@
 	  value: true
 	});
 
-	var _vuex = __webpack_require__(33);
+	var _vuex = __webpack_require__(32);
 
 	var _vuex2 = _interopRequireDefault(_vuex);
 
-	var _actions = __webpack_require__(34);
+	var _actions = __webpack_require__(33);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _mutations = __webpack_require__(36);
+	var _mutations = __webpack_require__(35);
 
 	var mutations = _interopRequireWildcard(_mutations);
 
@@ -3742,7 +3681,7 @@
 	exports.default = store;
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4508,7 +4447,7 @@
 	})));
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4522,7 +4461,7 @@
 	exports.FETCH_ITEMS = FETCH_ITEMS;
 	exports.FETCH_USER = FETCH_USER;
 
-	var _fetch = __webpack_require__(35);
+	var _fetch = __webpack_require__(34);
 
 	var LOAD_MORE_STEP = 10;
 
@@ -4585,7 +4524,7 @@
 	}
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4638,7 +4577,7 @@
 	}
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4680,7 +4619,7 @@
 	}
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -4741,7 +4680,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -4757,9 +4696,9 @@
 	    }
 	  })]) : _vm._e(), (_vm.story && _vm.story.kids) ? _h('div', {
 	    staticClass: ["comments-box"]
-	  }, [(_vm.story.kids.length) ? _h('text', {
+	  }, [(_vm.story.descendants) ? _h('text', {
 	    staticClass: ["comment-count"]
-	  }, [_vm._s(_vm.story.kids.length) + " comments"]) : _h('text', {
+	  }, [_vm._s(_vm.story.descendants) + " comments"]) : _h('text', {
 	    staticClass: ["comment-count"]
 	  }, ["no comments"]), _h('div', {
 	    staticClass: ["comment-list"]
@@ -4774,21 +4713,21 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
 	/* styles */
-	__vue_styles__.push(__webpack_require__(40)
+	__vue_styles__.push(__webpack_require__(39)
 	)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(41)
+	__vue_exports__ = __webpack_require__(40)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(42)
+	var __vue_template__ = __webpack_require__(41)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -4800,7 +4739,7 @@
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/zhaojinjiang/Sites/public/weex-hackernews/src/views/UserView.vue"
+	__vue_options__.__file = "/Users/Hanks/Projects/weex/weex-hackernews/src/views/UserView.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 	__vue_options__.style = __vue_options__.style || {}
@@ -4814,7 +4753,7 @@
 
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -4847,7 +4786,7 @@
 	}
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4898,7 +4837,7 @@
 	//
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -4925,7 +4864,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports) {
 
 	exports.sync = function (store, router, options) {
@@ -4986,7 +4925,7 @@
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4995,6 +4934,7 @@
 	  value: true
 	});
 	exports.host = host;
+	exports.https = https;
 	exports.timeAgo = timeAgo;
 	exports.unescape = unescape;
 	function host(url) {
@@ -5003,6 +4943,13 @@
 	  var parts = host.split('.').slice(-3);
 	  if (parts[0] === 'www') parts.shift();
 	  return parts.join('.');
+	}
+
+	function https(url) {
+	  if (WXEnvironment.platform === 'iOS' && typeof url === 'string') {
+	    return url.replace(/^http\:/, 'https:');
+	  }
+	  return '';
 	}
 
 	function timeAgo(time) {
@@ -5031,6 +4978,25 @@
 
 	  return res;
 	}
+
+/***/ },
+/* 44 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  methods: {
+	    jump: function jump(to) {
+	      if (this.$router) {
+	        this.$router.push(to);
+	      }
+	    }
+	  }
+	};
 
 /***/ }
 /******/ ]);
