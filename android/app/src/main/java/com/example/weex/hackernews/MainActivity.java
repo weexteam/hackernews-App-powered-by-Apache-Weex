@@ -1,12 +1,15 @@
 package com.example.weex.hackernews;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
 import com.taobao.weex.IWXRenderListener;
 import com.taobao.weex.WXSDKInstance;
+import com.taobao.weex.WXSDKManager;
 import com.taobao.weex.utils.WXFileUtils;
 
 public class MainActivity extends Activity implements IWXRenderListener {
@@ -47,7 +50,10 @@ public class MainActivity extends Activity implements IWXRenderListener {
 
     }
 
-
+    public void onBackPressed(){
+        Log.e("USER ACTION", "BACK");
+        WXSDKManager.getInstance().fireEvent(mWXSDKInstance.getInstanceId(),"_root","androidback");
+    }
 
     @Override
     protected void onResume() {
