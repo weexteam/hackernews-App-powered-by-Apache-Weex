@@ -14,9 +14,8 @@ npm install
 
 Compile the source code:
 
-+ `npm run build:web` # Compile the source code for web platform.
-+ `npm run build:weex` # Compile the source code for Android and iOS platform.
-+ `npm run build` # Run both `build:web` and `build:weex`.
++ `npm run build` # Compile the source code for web platform and native platform.
++ `npm run dev` # Watch mode for `npm run build`.
 
 Copy the bundle file:
 
