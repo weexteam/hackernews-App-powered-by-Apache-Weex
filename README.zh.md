@@ -26,10 +26,10 @@ npm run dev
 拷贝 bundle 文件：
 
 ```bash
-# 将生成的 bundle 文件拷贝到 iOS 项目的资源目录
+# 将生成的 bundle 文件拷贝到 Android 项目的资源目录
 npm run copy:android
 
-# 将生成的 bundle 文件拷贝到 Android 项目的资源目录
+# 将生成的 bundle 文件拷贝到 iOS 项目的资源目录
 npm run copy:ios
 
 # run both copy:andriod and copy:ios
