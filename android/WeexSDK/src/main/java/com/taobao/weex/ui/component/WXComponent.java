@@ -128,20 +128,27 @@
 package com.taobao.weex.ui.component;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Message;
+import android.support.annotation.CallSuper;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.IWXActivityStateListener;
 import com.taobao.weex.WXEnvironment;
 import com.taobao.weex.WXSDKInstance;
@@ -151,9 +158,16 @@ import com.taobao.weex.common.Constants;
 import com.taobao.weex.common.IWXObject;
 import com.taobao.weex.common.WXRuntimeException;
 import com.taobao.weex.dom.ImmutableDomObject;
+import com.taobao.weex.dom.WXDomHandler;
 import com.taobao.weex.dom.WXDomObject;
+import com.taobao.weex.dom.WXDomTask;
+import com.taobao.weex.dom.WXStyle;
 import com.taobao.weex.dom.flex.Spacing;
 import com.taobao.weex.ui.IFComponentHolder;
+import com.taobao.weex.ui.animation.WXAnimationModule;
+import com.taobao.weex.ui.component.pesudo.OnActivePseudoListner;
+import com.taobao.weex.ui.component.pesudo.PesudoStatus;
+import com.taobao.weex.ui.component.pesudo.TouchActivePseudoListener;
 import com.taobao.weex.ui.view.border.BorderDrawable;
 import com.taobao.weex.ui.view.gesture.WXGesture;
 import com.taobao.weex.ui.view.gesture.WXGestureObservable;
@@ -177,7 +191,7 @@ import java.util.Set;
  * abstract component
  *
  */
-public abstract class  WXComponent<T extends View> implements IWXObject, IWXActivityStateListener {
+public abstract class  WXComponent<T extends View> implements IWXObject, IWXActivityStateListener,OnActivePseudoListner {
 
   public static final String PROP_FIXED_SIZE = "fixedSize";
   public static final String PROP_FS_MATCH_PARENT = "m";
@@ -208,6 +222,13 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
   private List<OnFocusChangeListener> mFocusChangeListeners;
   private String mCurrentRef;
   private Set<String> mAppendEvents = new HashSet<>();
+  private WXAnimationModule.AnimationHolder mAnimationHolder;
+  private PesudoStatus mPesudoStatus = new PesudoStatus();
+
+  //Holding the animation bean when component is uninitialized
+  public void postAnimation(WXAnimationModule.AnimationHolder holder) {
+    this.mAnimationHolder = holder;
+  }
 
   private OnClickListener mClickEventListener = new OnClickListener() {
     @Override
@@ -216,10 +237,10 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
       Map<String, Object> position = WXDataStructureUtil.newHashMapWithExpectedSize(4);
       int[] location = new int[2];
       mHost.getLocationOnScreen(location);
-      position.put("x", WXViewUtils.getWebPxByWidth(location[0]));
-      position.put("y", WXViewUtils.getWebPxByWidth(location[1]));
-      position.put("width", WXViewUtils.getWebPxByWidth(mDomObj.getLayoutWidth()));
-      position.put("height", WXViewUtils.getWebPxByWidth(mDomObj.getLayoutHeight()));
+      position.put("x", WXViewUtils.getWebPxByWidth(location[0],mInstance.getViewPortWidth()));
+      position.put("y", WXViewUtils.getWebPxByWidth(location[1],mInstance.getViewPortWidth()));
+      position.put("width", WXViewUtils.getWebPxByWidth(mDomObj.getLayoutWidth(),mInstance.getViewPortWidth()));
+      position.put("height", WXViewUtils.getWebPxByWidth(mDomObj.getLayoutHeight(),mInstance.getViewPortWidth()));
       param.put(Constants.Name.POSITION, position);
       fireEvent(Constants.Event.CLICK,param);
     }
@@ -230,9 +251,17 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
   }
 
   public Rect getComponentSize() {
-     Rect size=new Rect();
-    if(mHost!=null){
-      mHost.getGlobalVisibleRect(size);
+    Rect size = new Rect();
+    if (mHost != null) {
+      int[] location = new int[2];
+      int[] anchor = new int[2];
+      mHost.getLocationOnScreen(location);
+      mInstance.getContainerView().getLocationOnScreen(anchor);
+      int left = location[0] - anchor[0];
+      int top = location[1] - anchor[1];
+      int width = (int) mDomObj.getLayoutWidth();
+      int height = (int) mDomObj.getLayoutHeight();
+      size.set(left, top, left + width, top + height);
     }
     return size;
   }
@@ -263,7 +292,7 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
 
   }
 
-  interface OnClickListener{
+  public interface OnClickListener{
     void onHostViewClick();
   }
 
@@ -323,11 +352,11 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     return null;
   }
 
-  protected final void fireEvent(String type){
+  public final void fireEvent(String type){
     fireEvent(type,null);
   }
 
-  protected final void fireEvent(String type, Map<String, Object> params){
+  public final void fireEvent(String type, Map<String, Object> params){
     fireEvent(type,params,null);
   }
 
@@ -559,6 +588,7 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     for (int i = 0; i < count; ++i) {
       addEvent(mDomObj.getEvents().get(i));
     }
+    setActiveTouchListener();
   }
 
   public void updateExtra(Object extra) {
@@ -596,7 +626,7 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
       Object param = entry.getValue();
       String value = WXUtils.getString(param, null);
       if (TextUtils.isEmpty(value)) {
-        param = convertEmptyProperty(key);
+        param = convertEmptyProperty(key, value);
       }
       if (!setProperty(key, param)) {
         if (mHolder == null) {
@@ -618,6 +648,7 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
         }
       }
     }
+    readyToRender();
   }
 
   /**
@@ -630,8 +661,10 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     switch (key) {
       case Constants.Name.DISABLED:
         Boolean disabled = WXUtils.getBoolean(param,null);
-        if (disabled != null)
+        if (disabled != null) {
           setDisabled(disabled);
+          setPseudoClassStatus(Constants.PESUDO.DISABLED, disabled);
+        }
         return true;
       case Constants.Name.POSITION:
         String position = WXUtils.getString(param,null);
@@ -642,6 +675,12 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
         String bgColor = WXUtils.getString(param,null);
         if (bgColor != null)
           setBackgroundColor(bgColor);
+        return true;
+      case Constants.Name.BACKGROUND_IMAGE:
+        String bgImage = WXUtils.getString(param,null);
+        if(bgImage!=null){
+          setBackgroundImage(bgImage);
+        }
         return true;
       case Constants.Name.OPACITY:
         Float opacity = WXUtils.getFloat(param,null);
@@ -688,6 +727,11 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
         String visibility = WXUtils.getString(param,null);
         if (visibility != null)
           setVisibility(visibility);
+        return true;
+      case Constants.Name.ELEVATION:
+        if(param!=null) {
+          updateElevation();
+        }
         return true;
       case PROP_FIXED_SIZE:
         String fixedSize = WXUtils.getString(param, PROP_FS_MATCH_PARENT);
@@ -748,12 +792,34 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     }
   }
 
+  /**
+   * Add new event to component,this will post a task to DOM thread to add event.
+   * @param type
+   */
+  protected void appendEventToDOM(String type){
+    Message message = Message.obtain();
+    WXDomTask task = new WXDomTask();
+    task.instanceId = getInstanceId();
+    task.args = new ArrayList<>();
+    task.args.add(getRef());
+    task.args.add(type);
+    message.obj = task;
+    message.what = WXDomHandler.MsgType.WX_DOM_ADD_EVENT;
+    WXSDKManager.getInstance().getWXDomManager().sendMessage(message);
+  }
+
+  /**
+   * Do not use this method to add event, this only apply event already add to DomObject.
+   * @param type
+   */
   public void addEvent(String type) {
     if (TextUtils.isEmpty(type)) {
       return;
     }
     mAppendEvents.add(type);
-    if (type.equals(Constants.Event.CLICK) && getRealView() != null) {
+
+    View view = getRealView();
+    if (type.equals(Constants.Event.CLICK) && view != null) {
       addClickListener(mClickEventListener);
     } else if ((type.equals( Constants.Event.FOCUS) || type.equals( Constants.Event.BLUR)) ) {
       addFocusChangeListener(new OnFocusChangeListener() {
@@ -763,16 +829,16 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
           fireEvent(hasFocus ? Constants.Event.FOCUS : Constants.Event.BLUR, params);
         }
       });
-    } else if (getRealView() != null &&
+    } else if (view != null &&
                needGestureDetector(type)) {
-      if (getRealView() instanceof WXGestureObservable) {
+      if (view instanceof WXGestureObservable) {
         if (wxGesture == null) {
           wxGesture = new WXGesture(this, mContext);
         }
         mGestureType.add(type);
-        ((WXGestureObservable) getRealView()).registerGestureListener(wxGesture);
+        ((WXGestureObservable) view).registerGestureListener(wxGesture);
       } else {
-        WXLogUtils.e(getRealView().getClass().getSimpleName() + " don't implement " +
+        WXLogUtils.e(view.getClass().getSimpleName() + " don't implement " +
                      "WXGestureObservable, so no gesture is supported.");
       }
     } else {
@@ -783,7 +849,6 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
       if (type.equals(Constants.Event.DISAPPEAR) && scroller != null) {
         scroller.bindDisappearEvent(this);
       }
-
     }
   }
 
@@ -898,9 +963,19 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
   }
 
   /**
-   * After view init.
+   * Called after host view init. <br>
+   * Any overriding methods should invoke this method at the right time, to ensure the cached animation can be triggered correctly.
+   * (the animation will be cached when {@link #isLazy()} is true)
+   * @param host the host view
    */
-  protected void onHostViewInitialized(T host){}
+  @CallSuper
+  protected void onHostViewInitialized(T host){
+    if (mAnimationHolder != null) {
+      //Performs cached animation
+      mAnimationHolder.execute(mInstance, this);
+    }
+    setActiveTouchListener();
+  }
 
   public T getHostView() {
     return mHost;
@@ -1015,6 +1090,13 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     }
   }
 
+  public void setBackgroundImage(String bgImage) {
+    if (!TextUtils.isEmpty(bgImage) && mHost != null) {
+      Shader shader = WXResourceUtils.getShader(bgImage, mDomObj.getLayoutWidth(), mDomObj.getLayoutHeight());
+      getOrCreateBorder().setImage(shader);
+    }
+  }
+
   public void setOpacity(float opacity) {
     if (opacity >= 0 && opacity <= 1 && mHost.getAlpha() != opacity) {
       mHost.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -1026,19 +1108,19 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     if (borderRadius >= 0) {
       switch (key) {
         case Constants.Name.BORDER_RADIUS:
-          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_RADIUS_ALL, WXViewUtils.getRealSubPxByWidth(borderRadius));
+          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_RADIUS_ALL, WXViewUtils.getRealSubPxByWidth(borderRadius,mInstance.getViewPortWidth()));
           break;
         case Constants.Name.BORDER_TOP_LEFT_RADIUS:
-          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_TOP_LEFT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius));
+          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_TOP_LEFT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius,mInstance.getViewPortWidth()));
           break;
         case Constants.Name.BORDER_TOP_RIGHT_RADIUS:
-          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_TOP_RIGHT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius));
+          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_TOP_RIGHT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius,mInstance.getViewPortWidth()));
           break;
         case Constants.Name.BORDER_BOTTOM_RIGHT_RADIUS:
-          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_BOTTOM_RIGHT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius));
+          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_BOTTOM_RIGHT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius,mInstance.getViewPortWidth()));
           break;
         case Constants.Name.BORDER_BOTTOM_LEFT_RADIUS:
-          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_BOTTOM_LEFT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius));
+          getOrCreateBorder().setBorderRadius(BorderDrawable.BORDER_BOTTOM_LEFT_RADIUS, WXViewUtils.getRealSubPxByWidth(borderRadius,mInstance.getViewPortWidth()));
           break;
       }
     }
@@ -1048,19 +1130,19 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     if (borderWidth >= 0) {
       switch (key) {
         case Constants.Name.BORDER_WIDTH:
-          getOrCreateBorder().setBorderWidth(Spacing.ALL, WXViewUtils.getRealSubPxByWidth(borderWidth));
+          getOrCreateBorder().setBorderWidth(Spacing.ALL, WXViewUtils.getRealSubPxByWidth(borderWidth,getInstance().getViewPortWidth()));
           break;
         case Constants.Name.BORDER_TOP_WIDTH:
-          getOrCreateBorder().setBorderWidth(Spacing.TOP, WXViewUtils.getRealSubPxByWidth(borderWidth));
+          getOrCreateBorder().setBorderWidth(Spacing.TOP, WXViewUtils.getRealSubPxByWidth(borderWidth,getInstance().getViewPortWidth()));
           break;
         case Constants.Name.BORDER_RIGHT_WIDTH:
-          getOrCreateBorder().setBorderWidth(Spacing.RIGHT, WXViewUtils.getRealSubPxByWidth(borderWidth));
+          getOrCreateBorder().setBorderWidth(Spacing.RIGHT, WXViewUtils.getRealSubPxByWidth(borderWidth,getInstance().getViewPortWidth()));
           break;
         case Constants.Name.BORDER_BOTTOM_WIDTH:
-          getOrCreateBorder().setBorderWidth(Spacing.BOTTOM, WXViewUtils.getRealSubPxByWidth(borderWidth));
+          getOrCreateBorder().setBorderWidth(Spacing.BOTTOM, WXViewUtils.getRealSubPxByWidth(borderWidth,getInstance().getViewPortWidth()));
           break;
         case Constants.Name.BORDER_LEFT_WIDTH:
-          getOrCreateBorder().setBorderWidth(Spacing.LEFT, WXViewUtils.getRealSubPxByWidth(borderWidth));
+          getOrCreateBorder().setBorderWidth(Spacing.LEFT, WXViewUtils.getRealSubPxByWidth(borderWidth,getInstance().getViewPortWidth()));
           break;
       }
     }
@@ -1134,44 +1216,67 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     }
   }
 
-  public void registerActivityStateListener() {
-    if (mInstance != null) {
-      mInstance.registerActivityStateListener(this);
+  /**
+   * This is an experimental feature for elevation of material design.
+   */
+  private void updateElevation() {
+    float elevation = getDomObject().getAttrs().getElevation(getInstance().getViewPortWidth());
+    if (!Float.isNaN(elevation)) {
+      ViewCompat.setElevation(getHostView(), elevation);
     }
   }
 
-  @Override
+  @Deprecated
+  public void registerActivityStateListener() {
+
+  }
+
+
+  /********************************
+   *  begin hook Activity life cycle callback
+   ********************************************************/
   public void onActivityCreate() {
 
   }
 
-  @Override
   public void onActivityStart() {
 
   }
 
-  @Override
   public void onActivityPause() {
 
   }
 
-  @Override
   public void onActivityResume() {
+
   }
 
-  @Override
   public void onActivityStop() {
+
   }
 
-  @Override
   public void onActivityDestroy() {
 
   }
 
-  @Override
   public boolean onActivityBack() {
     return false;
   }
+
+  public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+  }
+
+  public boolean onCreateOptionsMenu(Menu menu){return false;}
+
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+  }
+
+  /********************************
+   *  end hook Activity life cycle callback
+   ********************************************************/
+
 
   public void destroy() {
     if (WXEnvironment.isApkDebugable() && !WXUtils.isUiThread()) {
@@ -1242,10 +1347,26 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
     isUsing = using;
   }
 
+  public void readyToRender() {
+    if (mParent != null && getInstance().isTrackComponent()) {
+      mParent.readyToRender();
+    }
+  }
+
   public static class MeasureOutput {
 
     public int width;
     public int height;
+  }
+
+  /**
+   * Determine whether the current component needs to be placed in the real View tree
+   * @return false component add subview
+   */
+  public boolean isVirtualComponent(){
+    return false;
+  }
+  public void removeVirtualComponent() {
   }
 
   public boolean hasScrollParent(WXComponent component) {
@@ -1263,10 +1384,59 @@ public abstract class  WXComponent<T extends View> implements IWXObject, IWXActi
    * @param propName
      */
   @CheckResult
-  protected Object convertEmptyProperty(String propName) {
+  protected Object convertEmptyProperty(String propName, Object originalValue) {
     if (Constants.Name.BACKGROUND_COLOR.equals(propName)) {
       return "transparent";
     }
-    return null;
+    return originalValue;
+  }
+
+  private void setActiveTouchListener(){
+    boolean hasActivePesudo = mDomObj.getStyles().getPesudoStyles().containsKey(Constants.PESUDO.ACTIVE);
+    View view;
+    if(hasActivePesudo && (view = getRealView()) != null) {
+      boolean hasTouchConsumer = (mHostClickListeners != null && mHostClickListeners.size() > 0) || wxGesture != null;
+      view.setOnTouchListener(new TouchActivePseudoListener(this,!hasTouchConsumer));
+    }
+  }
+
+  @Override
+  public void updateActivePseudo(boolean isSet) {
+    setPseudoClassStatus(Constants.PESUDO.ACTIVE,isSet);
+  }
+
+  /**
+   *
+   * @param clzName like ':active' or ':active:enabled'
+   * @param status
+   */
+  protected void setPseudoClassStatus(String clzName,boolean status){
+    WXStyle styles = getDomObject().getStyles();
+    Map<String, Map<String,Object>> pesudoStyles = styles.getPesudoStyles();
+
+    if(pesudoStyles == null || pesudoStyles.size() == 0){
+      return;
+    }
+    Map<String,Object> resultStyles = mPesudoStatus.updateStatusAndGetUpdateStyles(
+        clzName,
+        status,
+        pesudoStyles,
+        styles.getPesudoResetStyles());
+    updateStyleByPesudo(resultStyles);
+  }
+
+  private void updateStyleByPesudo(Map<String,Object> styles){
+    Message message = Message.obtain();
+    WXDomTask task = new WXDomTask();
+    task.instanceId = getInstanceId();
+    task.args = new ArrayList<>();
+
+    JSONObject styleJson = new JSONObject(styles);
+    task.args.add(getRef());
+    task.args.add(styleJson);
+    task.args.add(true);//flag pesudo
+    message.obj = task;
+    message.what = WXDomHandler.MsgType.WX_DOM_UPDATE_STYLE;
+    WXSDKManager.getInstance().getWXDomManager().sendMessage(message);
   }
 }

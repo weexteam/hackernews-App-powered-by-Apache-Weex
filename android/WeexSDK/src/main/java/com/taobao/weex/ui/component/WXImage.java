@@ -205,12 +205,11 @@
 package com.taobao.weex.ui.component;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -228,15 +227,14 @@ import com.taobao.weex.ui.ComponentCreator;
 import com.taobao.weex.ui.view.WXImageView;
 import com.taobao.weex.ui.view.border.BorderDrawable;
 import com.taobao.weex.utils.ImageDrawable;
+import com.taobao.weex.utils.ImgURIUtil;
 import com.taobao.weex.utils.WXDomUtils;
-import com.taobao.weex.utils.WXLogUtils;
 import com.taobao.weex.utils.WXUtils;
 import com.taobao.weex.utils.WXViewUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -269,33 +267,33 @@ public class WXImage extends WXComponent<ImageView> {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
       view.setCropToPadding(true);
     }
+    view.holdComponent(this);
     return view;
   }
 
-  @Override
-  protected boolean setProperty(String key, Object param) {
-    switch (key) {
-      case Constants.Name.RESIZE_MODE:
-        String resize_mode = WXUtils.getString(param, null);
-        if (resize_mode != null) {
-          setResizeMode(resize_mode);
-        }
-        return true;
-      case Constants.Name.RESIZE:
-        String resize = WXUtils.getString(param, null);
-        if (resize != null) {
-          setResize(resize);
-        }
-        return true;
-      case Constants.Name.SRC:
-        String src = WXUtils.getString(param, null);
-        if (src != null) {
-          setSrc(src);
-        }
-        return true;
-      case Constants.Name.IMAGE_QUALITY:
-        return true;
-    }
+    @Override
+    protected boolean setProperty(String key, Object param) {
+      switch (key) {
+        case Constants.Name.RESIZE_MODE:
+          String resize_mode = WXUtils.getString(param, null);
+          if (resize_mode != null)
+            setResizeMode(resize_mode);
+          return true;
+        case Constants.Name.RESIZE:
+          String resize = WXUtils.getString(param, null);
+          if (resize != null)
+            setResize(resize);
+          return true;
+        case Constants.Name.SRC:
+          String src = WXUtils.getString(param, null);
+          if (src != null)
+            setSrc(src);
+          return true;
+        case Constants.Name.IMAGE_QUALITY:
+          return true;
+        case Constants.Name.FILTER:
+          return true;
+      }
     return super.setProperty(key, param);
   }
 
@@ -341,17 +339,11 @@ public class WXImage extends WXComponent<ImageView> {
    * Process local scheme, load drawable.
    * @param rewrited
    */
-  private void setLocalSrc(Uri rewrited){
-    Resources resources = getContext().getResources();
-    List<String> segments = rewrited.getPathSegments();
-    if(segments.size() != 1){
-      WXLogUtils.e("Local src format is invalid.");
-      return;
-    }
+  private void setLocalSrc(Uri rewrited) {
     ImageView imageView;
-    int id = resources.getIdentifier(segments.get(0),"drawable",getContext().getPackageName());
-    if(id != 0 && (imageView = getHostView()) != null){
-      imageView.setImageDrawable(ResourcesCompat.getDrawable(resources,id,null));
+    Drawable localDrawable = ImgURIUtil.getDrawableFromLoaclSrc(getContext(), rewrited);
+    if (localDrawable != null && (imageView = getHostView()) != null) {
+      imageView.setImageDrawable(localDrawable);
     }
   }
 
@@ -373,39 +365,52 @@ public class WXImage extends WXComponent<ImageView> {
 
   private void setRemoteSrc(Uri rewrited) {
 
-    WXImageStrategy imageStrategy = new WXImageStrategy();
-    imageStrategy.isClipping = true;
+      WXImageStrategy imageStrategy = new WXImageStrategy();
+      imageStrategy.isClipping = true;
 
-    WXImageSharpen imageSharpen = getDomObject().getAttrs().getImageSharpen();
-    imageStrategy.isSharpen = imageSharpen == WXImageSharpen.SHARPEN;
+      WXImageSharpen imageSharpen = getDomObject().getAttrs().getImageSharpen();
+      imageStrategy.isSharpen = imageSharpen == WXImageSharpen.SHARPEN;
 
-    imageStrategy.setImageListener(new WXImageStrategy.ImageListener() {
-      @Override
-      public void onImageFinish(String url, ImageView imageView, boolean result, Map extra) {
-        if (!result && imageView != null) {
-          imageView.setImageDrawable(null);
+      int radius = getDomObject().getStyles().getBlur();
+      radius = Math.max(0, radius);
+      imageStrategy.blurRadius = Math.min(10, radius);
+
+      imageStrategy.setImageListener(new WXImageStrategy.ImageListener() {
+        @Override
+        public void onImageFinish(String url, ImageView imageView, boolean result, Map extra) {
+          if (getDomObject() != null && getDomObject().getEvents().contains(Constants.Event.ONLOAD)) {
+            Map<String, Object> params = new HashMap<String, Object>();
+            Map<String, Object> size = new HashMap<>(2);
+            if (imageView != null && imageView.getDrawable() != null && imageView.getDrawable() instanceof ImageDrawable) {
+              size.put("naturalWidth", ((ImageDrawable) imageView.getDrawable()).getBitmapWidth());
+              size.put("naturalHeight", ((ImageDrawable) imageView.getDrawable()).getBitmapHeight());
+            } else {
+              size.put("naturalWidth", 0);
+              size.put("naturalHeight", 0);
+            }
+
+            if (getDomObject() != null && containsEvent(Constants.Event.ONLOAD)) {
+              params.put("success", result);
+              params.put("size", size);
+              fireEvent(Constants.Event.ONLOAD, params);
+            }
+          }
         }
-        if (getDomObject() != null && containsEvent(Constants.Event.ONLOAD)) {
-          Map<String, Object> params = new HashMap<>();
-          params.put("success", result);
-          fireEvent(Constants.Event.ONLOAD, params);
+      });
+
+      WXSDKInstance instance = getInstance();
+      if (getDomObject().getAttrs().containsKey(Constants.Name.PLACE_HOLDER)) {
+        String attr = (String) getDomObject().getAttrs().get(Constants.Name.PLACE_HOLDER);
+        if (TextUtils.isEmpty(attr)) {
+          imageStrategy.placeHolder = instance.rewriteUri(Uri.parse(attr), URIAdapter.IMAGE).toString();
         }
       }
-    });
 
-    WXSDKInstance instance = getInstance();
-    if (getDomObject().getAttrs().containsKey(Constants.Name.PLACE_HOLDER)) {
-      String attr = (String) getDomObject().getAttrs().get(Constants.Name.PLACE_HOLDER);
-      if(TextUtils.isEmpty(attr)){
-        imageStrategy.placeHolder = instance.rewriteUri(Uri.parse(attr),URIAdapter.IMAGE).toString();
+      IWXImgLoaderAdapter imgLoaderAdapter = getInstance().getImgLoaderAdapter();
+      if (imgLoaderAdapter != null) {
+        imgLoaderAdapter.setImage(rewrited.toString(), getHostView(),
+            getDomObject().getAttrs().getImageQuality(), imageStrategy);
       }
-    }
-
-    IWXImgLoaderAdapter imgLoaderAdapter = getInstance().getImgLoaderAdapter();
-    if (imgLoaderAdapter != null) {
-      imgLoaderAdapter.setImage(rewrited.toString(), getHostView(),
-                                getDomObject().getAttrs().getImageQuality(), imageStrategy);
-    }
   }
 
   @Override
@@ -433,6 +438,7 @@ public class WXImage extends WXComponent<ImageView> {
           imageDrawable.setCornerRadii(borderRadius);
         }
       }
+      readyToRender();
     }
   }
 }

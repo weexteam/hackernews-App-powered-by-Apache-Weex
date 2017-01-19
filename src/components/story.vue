@@ -39,6 +39,7 @@
   }
   .story-link {
     margin-bottom: 25px;
+    width: 610px;
   }
   .story-title {
     font-size: 33px;

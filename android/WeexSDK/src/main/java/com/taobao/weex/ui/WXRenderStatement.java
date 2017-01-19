@@ -213,6 +213,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXEnvironment;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.WXSDKManager;
+import com.taobao.weex.bridge.JSCallback;
 import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.dom.WXDomObject;
 import com.taobao.weex.dom.flex.Spacing;
@@ -423,7 +424,7 @@ class WXRenderStatement {
   void addEvent(String ref, String type) {
     WXComponent component = mRegistry.get(ref);
     if (component == null) {
-      return;
+      return ;
     }
     component.addEvent(type);
   }
@@ -434,7 +435,7 @@ class WXRenderStatement {
   void removeEvent(String ref, String type) {
     WXComponent component = mRegistry.get(ref);
     if (component == null) {
-      return;
+      return ;
     }
     component.removeEvent(type);
   }
@@ -477,7 +478,7 @@ class WXRenderStatement {
       String offset = options.get("offset") == null ? "0" : options.get("offset").toString();
       if (offset != null) {
         try {
-          offsetFloat = WXViewUtils.getRealPxByWidth(Float.parseFloat(offset));
+          offsetFloat = WXViewUtils.getRealPxByWidth(Float.parseFloat(offset),mWXSDKInstance.getViewPortWidth());
         }catch (Exception e ){
            WXLogUtils.e("Float parseFloat error :"+e.getMessage());
         }
@@ -545,23 +546,23 @@ class WXRenderStatement {
     WXAnimationModule.startAnimation(mWXSDKInstance, mRegistry.get(ref), animationBean, callBack);
   }
 
-  public void getComponentSize(String ref, String callback) {
+  public void getComponentSize(String ref, JSCallback callback) {
     WXComponent component = mRegistry.get(ref);
     Map<String, Object> options = new HashMap<>();
     if (component != null) {
       Map<String, String> size = new HashMap<>();
       Rect sizes = component.getComponentSize();
-      size.put("width", String.valueOf(WXViewUtils.getWebPxByWidth(sizes.width())));
-      size.put("height", String.valueOf(WXViewUtils.getWebPxByWidth(sizes.height())));
-      size.put("bottom",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.bottom)));
-      size.put("left",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.left)));
-      size.put("right",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.right)));
-      size.put("top",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.top)));
+      size.put("width", String.valueOf(WXViewUtils.getWebPxByWidth(sizes.width(),mWXSDKInstance.getViewPortWidth())));
+      size.put("height", String.valueOf(WXViewUtils.getWebPxByWidth(sizes.height(),mWXSDKInstance.getViewPortWidth())));
+      size.put("bottom",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.bottom,mWXSDKInstance.getViewPortWidth())));
+      size.put("left",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.left,mWXSDKInstance.getViewPortWidth())));
+      size.put("right",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.right,mWXSDKInstance.getViewPortWidth())));
+      size.put("top",String.valueOf(WXViewUtils.getWebPxByWidth(sizes.top,mWXSDKInstance.getViewPortWidth())));
       options.put("size", size);
       options.put("result", true);
     } else {
       options.put("errMsg", "Component does not exist");
     }
-    WXSDKManager.getInstance().callback(mWXSDKInstance.getInstanceId(), callback, options);
+    callback.invoke(options);
   }
 }
