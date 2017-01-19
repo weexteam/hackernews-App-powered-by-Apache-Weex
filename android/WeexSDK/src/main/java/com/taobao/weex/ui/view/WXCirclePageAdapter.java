@@ -309,10 +309,18 @@ public class WXCirclePageAdapter extends PagerAdapter {
 
   @Override
   public int getItemPosition(Object object) {
+    return POSITION_NONE;
+  }
+
+  public int getPagePosition(View page) {
+    return views.indexOf(page);
+  }
+
+  public int getItemIndex(Object object) {
     if (object instanceof View) {
       return views.indexOf(object);
     } else {
-      return POSITION_UNCHANGED;
+      return -1;
     }
   }
 
@@ -321,19 +329,19 @@ public class WXCirclePageAdapter extends PagerAdapter {
   }
 
   private void ensureShadow() {
-    shadow.clear();
-    if (needLoop) {
-      shadow.add(0, views.get(views.size() - 1));
+    List<View> temp = new ArrayList<>();
+    if (needLoop && views.size() > 2) {
+      temp.add(0, views.get(views.size() - 1));
       for (View view : views) {
-        shadow.add(view);
+        temp.add(view);
       }
-      for (View view : views) {
-        shadow.add(view);
-      }
-      shadow.add(views.get(0));
+      temp.add(views.get(0));
     } else {
-      shadow.addAll(views);
+      temp.addAll(views);
     }
+    shadow.clear();
+    notifyDataSetChanged();
+    shadow.addAll(temp);
     notifyDataSetChanged();
   }
 
@@ -341,13 +349,13 @@ public class WXCirclePageAdapter extends PagerAdapter {
     if (shadowPosition < 0 || shadowPosition >= shadow.size()) {
       return -1;
     } else {
-      return getItemPosition(shadow.get(shadowPosition));
+      return getItemIndex(shadow.get(shadowPosition));
     }
   }
 
   public int getFirst() {
-    if (needLoop) {
-      return getRealCount() + 1;
+    if (needLoop && views.size() > 2) {
+      return 1;
     } else {
       return 0;
     }

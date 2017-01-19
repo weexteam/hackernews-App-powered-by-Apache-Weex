@@ -213,6 +213,7 @@ public class Constants {
   }
 
   public interface Name {
+
     String DEFAULT_WIDTH = "defaultWidth";
     String DEFAULT_HEIGHT = "defaultHeight";
     String HREF = "href";
@@ -247,6 +248,7 @@ public class Constants {
 
 
     String BACKGROUND_COLOR = "backgroundColor";
+    String BACKGROUND_IMAGE = "backgroundImage";
     String OPACITY = "opacity";
     String BORDER_RADIUS = "borderRadius";
     String BORDER_WIDTH = "borderWidth";
@@ -285,6 +287,7 @@ public class Constants {
     String DISABLED = "disabled";
     String VALUE = "value";
     String IMAGE_QUALITY = "imageQuality";
+    String FILTER = "filter";
     String QUALITY = "quality";
     String SRC = "src";
     String PLACE_HOLDER = "placeHolder";
@@ -325,6 +328,13 @@ public class Constants {
     String MAX = "max";
     String MIN = "min";
     String NAV_BAR_VISIBILITY = "hidden";
+    String OFFSET_X_ACCURACY = "offsetXAccuracy";
+    String OFFSET_X_RATIO = "offsetXRatio";
+    String ELEVATION = "elevation";
+    String SCROLLABLE = "scrollable";
+    String DISTANCE_Y = "dy";
+    String PULLING_DISTANCE = "pullingDistance";
+    String VIEW_HEIGHT = "viewHeight";
   }
 
   public interface Value {
@@ -355,6 +365,10 @@ public class Constants {
     String PLAY = "play";
     String PAUSE = "pause";
     String STOP = "stop";
+    String DIRECTION_LEFT = "left";
+    String DIRECTION_RIGHT = "right";
+    String DIRECTION_UP = "up";
+    String DIRECTION_DOWN = "down";
   }
 
   public interface Event {
@@ -381,6 +395,18 @@ public class Constants {
     String ONLOAD = "load";
     String CHANGE = "change";
     String ONPULLING_DOWN = "pullingdown";
+    String ONPULLING_UP = "pullingup";
+    String SCROLL = "scroll";
+    String CLICKBACKITEM = "clickbackitem";
+    String RESUME_EVENT = "WXApplicationDidBecomeActiveEvent";
+    String PAUSE_EVENT = "WXApplicationWillResignActiveEvent";
+  }
+
+  public interface PESUDO {
+    String ACTIVE = ":active";
+    String ENABLED = ":enabled";
+    String DISABLED = ":disabled";
+    String FOCUS = ":focus";
   }
 
   public interface Scheme {

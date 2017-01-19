@@ -205,20 +205,27 @@
 package com.taobao.weex.ui.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.taobao.weex.ui.component.WXImage;
 import com.taobao.weex.ui.view.gesture.WXGesture;
 import com.taobao.weex.ui.view.gesture.WXGestureObservable;
 import com.taobao.weex.utils.ImageDrawable;
 
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 
-public class WXImageView extends ImageView implements WXGestureObservable {
+public class WXImageView extends ImageView implements WXGestureObservable,
+                                                      IRenderStatus<WXImage> {
 
+  private WeakReference<WXImage> mWeakReference;
   private WXGesture wxGesture;
   private float[] borderRadius;
   private boolean gif;
@@ -233,7 +240,7 @@ public class WXImageView extends ImageView implements WXGestureObservable {
     setImageDrawable(drawable);
   }
 
-  public void setImageDrawable(Drawable drawable, boolean isGif) {
+  public void setImageDrawable(@Nullable Drawable drawable, boolean isGif) {
     this.gif = isGif;
     ViewGroup.LayoutParams layoutParams;
     if ((layoutParams = getLayoutParams()) != null) {
@@ -249,12 +256,23 @@ public class WXImageView extends ImageView implements WXGestureObservable {
         }
       }
       super.setImageDrawable(wrapDrawable);
+      if (mWeakReference != null) {
+        WXImage component = mWeakReference.get();
+        if (component != null) {
+          component.readyToRender();
+        }
+      }
     }
   }
 
   @Override
-  public void setImageDrawable(Drawable drawable) {
+  public void setImageDrawable(@Nullable Drawable drawable) {
     setImageDrawable(drawable, false);
+  }
+
+  @Override
+  public void setImageBitmap(@Nullable Bitmap bm) {
+    setImageDrawable(bm == null ? null : new BitmapDrawable(getResources(), bm));
   }
 
   @Override
@@ -281,5 +299,10 @@ public class WXImageView extends ImageView implements WXGestureObservable {
     if (changed) {
       setImageDrawable(getDrawable(), gif);
     }
+  }
+
+  @Override
+  public void holdComponent(WXImage component) {
+    mWeakReference = new WeakReference<>(component);
   }
 }
