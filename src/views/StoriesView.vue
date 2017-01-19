@@ -61,6 +61,9 @@
 </script>
 
 <style scoped>
+  .stories-view {
+    height: 100%;
+  }
   .story-cell {
     margin-bottom: 3px;
     border-bottom-width: 2px;

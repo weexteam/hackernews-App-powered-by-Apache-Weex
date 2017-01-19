@@ -1,6 +1,6 @@
 <template>
   <div @androidback="back">
-    <router-view style="flex:1"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
