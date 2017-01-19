@@ -4537,7 +4537,7 @@
 	exports.fetchItem = fetchItem;
 	exports.fetchItems = fetchItems;
 	exports.fetchUser = fetchUser;
-	var stream = weex.require('stream');
+	var stream = weex.requireModule('stream');
 	var baseURL = 'https://hacker-news.firebaseio.com/v0';
 
 	function fetch(path) {
