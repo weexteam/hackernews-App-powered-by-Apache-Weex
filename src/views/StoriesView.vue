@@ -72,7 +72,7 @@
     background-color: #FFFFFF;
   }
   .loading {
-    width: 100%;
+    width: 750px;
     height: 120px;
     display: flex;
     align-items: center;
