@@ -1,6 +1,6 @@
 {
   "name": "weex-hackernews",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Weex HackerNews App, powered by Vue 2.x.",
   "main": "index.js",
   "keywords": [
@@ -30,7 +30,7 @@
     "vue-router": "^2.1.1",
     "vuex": "^2.1.1",
     "vuex-router-sync": "^4.0.1",
-    "weex-vue-render": "^0.1.6"
+    "weex-vue-render": "^0.1.8"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",
