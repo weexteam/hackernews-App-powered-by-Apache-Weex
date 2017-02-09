@@ -1,13 +1,13 @@
 // import Vue from 'vue'
 import Router from 'vue-router'
-
-Vue.use(Router)
-
 import StoriesView from './views/StoriesView.vue'
 import ArticleView from './views/ArticleView.vue'
 import CommentView from './views/CommentView.vue'
 import UserView from './views/UserView.vue'
 
+Vue.use(Router)
+
+// Story view factory
 function createStoriesView (type) {
   return {
     name: `${type}-stories-view`,

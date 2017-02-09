@@ -2,14 +2,12 @@ const stream = weex.requireModule('stream')
 const baseURL = 'https://hacker-news.firebaseio.com/v0'
 
 export function fetch (path) {
-  // console.log('----------> fetch: ' + path)
   return new Promise((resolve, reject) => {
     stream.fetch({
       method: 'GET',
       url: `${baseURL}/${path}.json`,
       type: 'json'
     }, (response) => {
-      // console.log('----------> response.status: ' + response.status)
       if (response.status == 200) {
         resolve(response.data)
       }

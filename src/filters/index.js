@@ -31,9 +31,10 @@ function pluralize (time, label) {
   return time + label + 's'
 }
 
-export function unescape(text) {
-  let res = text || '';
-  [
+export function unescape (text) {
+  let res = text || ''
+
+  ;[
     ['<p>', '\n'],
     ['&amp;', '&'],
     ['&amp;', '&'],
