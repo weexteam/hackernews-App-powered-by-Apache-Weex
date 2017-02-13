@@ -30,7 +30,7 @@
     "vue-router": "^2.1.1",
     "vuex": "^2.1.1",
     "vuex-router-sync": "^4.0.1",
-    "weex-vue-render": "^0.1.8"
+    "weex-vue-render": "^0.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",
