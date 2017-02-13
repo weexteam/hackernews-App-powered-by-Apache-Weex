@@ -203,9 +203,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	Vue.use(_vueRouter2.default); // import Vue from 'vue'
+	Vue.use(_vueRouter2.default);
 
-
+	// Story view factory
+	// import Vue from 'vue'
 	function createStoriesView(type) {
 	  return {
 	    name: type + '-stories-view',
@@ -3850,6 +3851,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// Vuex is auto installed on the web
 	if (WXEnvironment.platform !== 'Web') {
 	  Vue.use(_vuex2.default);
 	} // import Vue from 'vue'
@@ -4811,14 +4813,12 @@
 	var baseURL = 'https://hacker-news.firebaseio.com/v0';
 
 	function fetch(path) {
-	  // console.log('----------> fetch: ' + path)
 	  return new Promise(function (resolve, reject) {
 	    stream.fetch({
 	      method: 'GET',
 	      url: baseURL + '/' + path + '.json',
 	      type: 'json'
 	    }, function (response) {
-	      // console.log('----------> response.status: ' + response.status)
 	      if (response.status == 200) {
 	        resolve(response.data);
 	      } else {
@@ -5241,8 +5241,7 @@
 	}
 
 	function unescape(text) {
-	  var res = text || '';
-	  [['<p>', '\n'], ['&amp;', '&'], ['&amp;', '&'], ['&apos;', '\''], ['&#x27;', '\''], ['&#x2F;', '/'], ['&#39;', '\''], ['&#47;', '/'], ['&lt;', '<'], ['&gt;', '>'], ['&nbsp;', ' '], ['&quot;', '"']].forEach(function (pair) {
+	  var res = text || '';[['<p>', '\n'], ['&amp;', '&'], ['&amp;', '&'], ['&apos;', '\''], ['&#x27;', '\''], ['&#x2F;', '/'], ['&#39;', '\''], ['&#47;', '/'], ['&lt;', '<'], ['&gt;', '>'], ['&nbsp;', ' '], ['&quot;', '"']].forEach(function (pair) {
 	    res = res.replace(new RegExp(pair[0], 'ig'), pair[1]);
 	  });
 
