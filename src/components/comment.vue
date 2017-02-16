@@ -15,7 +15,7 @@
     <div class="comment-inner" :style="{ marginLeft: indent }" v-if="!collapsed">
       <text class="comment-title">{{comment.text | unescape }}</text>
       <div class="comment-list">
-        <comment v-for="id in comment.kids" :id="id" :depth="depth + 1"></comment>
+        <comment v-for="id in comment.kids" :id="id" :key="id" :depth="depth + 1"></comment>
       </div>
     </div>
   </div>
