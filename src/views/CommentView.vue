@@ -9,7 +9,7 @@
         <text class="comment-count" v-if="story.descendants">{{story.descendants}} comments</text>
         <text class="comment-count" v-else>no comments</text>
         <div class="comment-list">
-          <comment v-for="id in story.kids" :id="id"></comment>
+          <comment v-for="id in story.kids" :id="id" :key="id"></comment>
         </div>
       </div>
     </scroller>
