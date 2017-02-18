@@ -2,7 +2,7 @@
   <div class="stories-view" append="tree">
     <app-header></app-header>
     <list class="story-list" @loadmore="loadMoreStories" loadmoreoffset="50">
-      <cell class="story-cell" v-for="story in stories" append="tree">
+      <cell class="story-cell" v-for="story in stories" :key="story.id" append="tree">
         <story :story="story"></story>
       </cell>
     </list>
