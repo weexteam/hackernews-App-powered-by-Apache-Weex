@@ -159,15 +159,15 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
+	  return _c('div', {
 	    on: {
 	      "androidback": _vm.back
 	    }
-	  }, [_h('router-view', {
+	  }, [_c('router-view', {
 	    staticStyle: {
 	      flex: "1"
 	    }
-	  })])
+	  })], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -226,7 +226,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
-	  * vue-router v2.2.0
+	  * vue-router v2.2.1
 	  * (c) 2017 Evan You
 	  * @license MIT
 	  */
@@ -1607,12 +1607,11 @@
 
 	function setupScroll () {
 	  window.addEventListener('popstate', function (e) {
+	    saveScrollPosition();
 	    if (e.state && e.state.key) {
 	      setStateKey(e.state.key);
 	    }
 	  });
-
-	  window.addEventListener('scroll', saveScrollPosition);
 	}
 
 	function handleScroll (
@@ -1737,6 +1736,7 @@
 	}
 
 	function pushState (url, replace) {
+	  saveScrollPosition();
 	  // try...catch the pushState call to get around Safari
 	  // DOM Exception 18 where it limits to 100 pushState calls
 	  var history = window.history;
@@ -1747,7 +1747,6 @@
 	      _key = genKey();
 	      history.pushState({ key: _key }, '', url);
 	    }
-	    saveScrollPosition();
 	  } catch (e) {
 	    window.location[replace ? 'replace' : 'assign'](url);
 	  }
@@ -2497,7 +2496,7 @@
 	}
 
 	VueRouter.install = install;
-	VueRouter.version = '2.2.0';
+	VueRouter.version = '2.2.1';
 
 	if (inBrowser && window.Vue) {
 	  window.Vue.use(VueRouter);
@@ -2937,68 +2936,68 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
+	  return _c('div', {
 	    staticClass: ["header"]
-	  }, [_h('div', {
+	  }, [_c('div', {
 	    staticClass: ["logo"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump('/')
 	      }
 	    }
-	  }, [_h('image', {
+	  }, [_c('image', {
 	    staticClass: ["image"],
 	    attrs: {
 	      "src": "https://news.ycombinator.com/favicon.ico"
 	    }
-	  })]), _h('div', {
+	  })]), _c('div', {
 	    staticClass: ["nav"]
-	  }, [_h('div', {
+	  }, [_c('div', {
 	    staticClass: ["link"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump('/top')
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["title"]
-	  }, ["Top"])]), _h('div', {
+	  }, [_vm._v("Top")])]), _c('div', {
 	    staticClass: ["link"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump('/new')
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["title"]
-	  }, ["New"])]), _h('div', {
+	  }, [_vm._v("New")])]), _c('div', {
 	    staticClass: ["link"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump('/show')
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["title"]
-	  }, ["Show"])]), _h('div', {
+	  }, [_vm._v("Show")])]), _c('div', {
 	    staticClass: ["link"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump('/ask')
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["title"]
-	  }, ["Ask"])]), _h('div', {
+	  }, [_vm._v("Ask")])]), _c('div', {
 	    staticClass: ["link"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump('/job')
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["title"]
-	  }, ["Job"])])])])
+	  }, [_vm._v("Job")])])])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -3240,21 +3239,24 @@
 	//
 	//
 	//
+	//
+	//
 
 	exports.default = {
-	  props: {
-	    url: {
-	      type: String,
-	      default: ''
-	    }
-	  },
+	  props: ['url'],
 	  methods: {
 	    open: function open() {
-	      if (this.$getConfig) {
-	        this.jump('/article/' + this.url);
-	      } else {
+	      // get the environment variables
+	      var env = weex.config.env || WXEnvironment;
+
+	      // open a new window (tab) on the web
+	      if (env.platform === 'Web') {
 	        window.open(this.url);
+	        return;
 	      }
+
+	      // change router path on native (Android & iOS)
+	      this.jump('/article/' + this.url);
 	    }
 	  }
 	};
@@ -3264,11 +3266,11 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
+	  return _c('div', {
 	    on: {
 	      "click": _vm.open
 	    }
-	  }, [_vm._t("default")])
+	  }, [_vm._t("default")], 2)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -3277,46 +3279,46 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
+	  return _c('div', {
 	    staticClass: ["cell-item"]
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["story-score"]
-	  }, [_vm._s(_vm.story.score)]), _h('external-link', {
+	  }, [_vm._v(_vm._s(_vm.story.score))]), _c('external-link', {
 	    staticClass: ["story-link"],
 	    attrs: {
 	      "url": _vm.story.url
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["story-title"]
-	  }, [_vm._s(_vm.story.title)]), (_vm.story.url) ? _h('text', {
+	  }, [_vm._v(_vm._s(_vm.story.title))]), (_vm.story.url) ? _c('text', {
 	    staticClass: ["small-text"]
-	  }, ["(" + _vm._s(_vm._f("host")(_vm.story.url)) + ")"]) : _vm._e()]), _h('div', {
+	  }, [_vm._v("(" + _vm._s(_vm._f("host")(_vm.story.url)) + ")")]) : _vm._e()]), _c('div', {
 	    staticClass: ["text-group"]
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["small-text", "text-cell"]
-	  }, ["by "]), _h('div', {
+	  }, [_vm._v("by ")]), _c('div', {
 	    staticClass: ["text-cell"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump(("/user/" + (_vm.story.by)))
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["small-text", "link-text"]
-	  }, [_vm._s(_vm.story.by)])]), _h('text', {
+	  }, [_vm._v(_vm._s(_vm.story.by))])]), _c('text', {
 	    staticClass: ["small-text", "text-cell"]
-	  }, [" | " + _vm._s(_vm._f("timeAgo")(_vm.story.time)) + " ago"]), (!_vm.noComment) ? _h('text', {
+	  }, [_vm._v(" | " + _vm._s(_vm._f("timeAgo")(_vm.story.time)) + " ago")]), (!_vm.noComment) ? _c('text', {
 	    staticClass: ["small-text", "text-cell"]
-	  }, [" | "]) : _vm._e(), (!_vm.noComment) ? _h('div', {
+	  }, [_vm._v(" | ")]) : _vm._e(), (!_vm.noComment) ? _c('div', {
 	    staticClass: ["text-cell"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump(("/item/" + (_vm.story.id)))
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["small-text", "link-text"]
-	  }, [_vm._s(_vm.story.descendants) + " comments"])]) : _vm._e()])])
+	  }, [_vm._v(_vm._s(_vm.story.descendants) + " comments")])]) : _vm._e()])], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -3325,13 +3327,13 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
+	  return _c('div', {
 	    staticClass: ["stories-view"],
 	    appendAsTree: true,
 	    attrs: {
 	      "append": "tree"
 	    }
-	  }, [_h('app-header'), _h('list', {
+	  }, [_c('app-header'), _c('list', {
 	    staticClass: ["story-list"],
 	    attrs: {
 	      "loadmoreoffset": "50"
@@ -3339,23 +3341,24 @@
 	    on: {
 	      "loadmore": _vm.loadMoreStories
 	    }
-	  }, [_vm._l((_vm.stories), function(story) {
-	    return _h('cell', {
+	  }, _vm._l((_vm.stories), function(story) {
+	    return _c('cell', {
+	      key: story.id,
 	      staticClass: ["story-cell"],
 	      appendAsTree: true,
 	      attrs: {
 	        "append": "tree"
 	      }
-	    }, [_h('story', {
+	    }, [_c('story', {
 	      attrs: {
 	        "story": story
 	      }
-	    })])
-	  })]), (_vm.loading) ? _h('div', {
+	    })], 1)
+	  })), (_vm.loading) ? _c('div', {
 	    staticClass: ["loading"]
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["loading-text"]
-	  }, ["loading ..."])]) : _vm._e()])
+	  }, [_vm._v("loading ...")])]) : _vm._e()], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -3470,19 +3473,19 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', [_h('web', {
+	  return _c('div', [_c('web', {
 	    staticClass: ["webview"],
 	    attrs: {
 	      "src": _vm._f("https")(_vm.url)
 	    }
-	  }), _h('text', {
+	  }), _c('text', {
 	    staticClass: ["fixed-button"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump("/")
 	      }
 	    }
-	  }, ["back"])])
+	  }, [_vm._v("back")])], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -4893,59 +4896,60 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return (_vm.comment) ? _h('div', {
+	  return (_vm.comment) ? _c('div', {
 	    class: _vm.className
-	  }, [(_vm.collapsed) ? _h('text', {
+	  }, [(_vm.collapsed) ? _c('text', {
 	    staticClass: ["small-text", "comment-btn"],
 	    on: {
 	      "click": function($event) {
 	        _vm.toggle(false)
 	      }
 	    }
-	  }, ["[+]"]) : _h('text', {
+	  }, [_vm._v("[+]")]) : _c('text', {
 	    staticClass: ["small-text", "comment-btn"],
 	    on: {
 	      "click": function($event) {
 	        _vm.toggle(true)
 	      }
 	    }
-	  }, ["[-]"]), _h('div', {
+	  }, [_vm._v("[-]")]), _c('div', {
 	    staticClass: ["text-group"],
 	    style: {
 	      marginLeft: _vm.indent
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["text-cell", "small-text"]
-	  }, ["by "]), _h('div', {
+	  }, [_vm._v("by ")]), _c('div', {
 	    staticClass: ["text-cell"],
 	    on: {
 	      "click": function($event) {
 	        _vm.jump(("/user/" + (_vm.comment.by)))
 	      }
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["small-text", "link"]
-	  }, [_vm._s(_vm.comment.by)])]), _h('text', {
+	  }, [_vm._v(_vm._s(_vm.comment.by))])]), _c('text', {
 	    staticClass: ["text-cell", "small-text"]
-	  }, [" | " + _vm._s(_vm._f("timeAgo")(_vm.comment.time)) + " ago"]), _h('text', {
+	  }, [_vm._v(" | " + _vm._s(_vm._f("timeAgo")(_vm.comment.time)) + " ago")]), _c('text', {
 	    staticClass: ["text-cell", "small-text"]
-	  }, [_vm._s(_vm.collapsed ? '  (collapsed)' : '')])]), (!_vm.collapsed) ? _h('div', {
+	  }, [_vm._v(_vm._s(_vm.collapsed ? '  (collapsed)' : ''))])]), (!_vm.collapsed) ? _c('div', {
 	    staticClass: ["comment-inner"],
 	    style: {
 	      marginLeft: _vm.indent
 	    }
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["comment-title"]
-	  }, [_vm._s(_vm._f("unescape")(_vm.comment.text))]), _h('div', {
+	  }, [_vm._v(_vm._s(_vm._f("unescape")(_vm.comment.text)))]), _c('div', {
 	    staticClass: ["comment-list"]
-	  }, [_vm._l((_vm.comment.kids), function(id) {
-	    return _h('comment', {
+	  }, _vm._l((_vm.comment.kids), function(id) {
+	    return _c('comment', {
+	      key: id,
 	      attrs: {
 	        "id": id,
 	        "depth": _vm.depth + 1
 	      }
 	    })
-	  })])]) : _vm._e()]) : _vm._e()
+	  }))]) : _vm._e()]) : _vm._e()
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -4954,31 +4958,32 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
+	  return _c('div', {
 	    staticClass: ["commont-view"]
-	  }, [_h('app-header'), _h('scroller', [(_vm.story) ? _h('div', {
+	  }, [_c('app-header'), _c('scroller', [(_vm.story) ? _c('div', {
 	    staticClass: ["story-cell"]
-	  }, [_h('story', {
+	  }, [_c('story', {
 	    staticClass: ["comment-story"],
 	    attrs: {
 	      "story": _vm.story,
-	      "no-comment": "true"
+	      "noComment": "true"
 	    }
-	  })]) : _vm._e(), (_vm.story && _vm.story.kids) ? _h('div', {
+	  })], 1) : _vm._e(), (_vm.story && _vm.story.kids) ? _c('div', {
 	    staticClass: ["comments-box"]
-	  }, [(_vm.story.descendants) ? _h('text', {
+	  }, [(_vm.story.descendants) ? _c('text', {
 	    staticClass: ["comment-count"]
-	  }, [_vm._s(_vm.story.descendants) + " comments"]) : _h('text', {
+	  }, [_vm._v(_vm._s(_vm.story.descendants) + " comments")]) : _c('text', {
 	    staticClass: ["comment-count"]
-	  }, ["no comments"]), _h('div', {
+	  }, [_vm._v("no comments")]), _c('div', {
 	    staticClass: ["comment-list"]
-	  }, [_vm._l((_vm.story.kids), function(id) {
-	    return _h('comment', {
+	  }, _vm._l((_vm.story.kids), function(id) {
+	    return _c('comment', {
+	      key: id,
 	      attrs: {
 	        "id": id
 	      }
 	    })
-	  })])]) : _vm._e()])])
+	  }))]) : _vm._e()])], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
@@ -5111,25 +5116,25 @@
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
+	  return _c('div', {
 	    staticClass: ["user-view"]
-	  }, [_h('app-header'), _h('div', {
+	  }, [_c('app-header'), _c('div', {
 	    staticClass: ["user-info"]
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["user-name"]
-	  }, [_vm._s(_vm.userId)]), (_vm.user) ? _h('div', {
+	  }, [_vm._v(_vm._s(_vm.userId))]), (_vm.user) ? _c('div', {
 	    staticClass: ["user-meta"]
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["meta-label"]
-	  }, ["Created: " + _vm._s(_vm._f("timeAgo")(_vm.user.created)) + " ago"]), _h('text', {
+	  }, [_vm._v("Created: " + _vm._s(_vm._f("timeAgo")(_vm.user.created)) + " ago")]), _c('text', {
 	    staticClass: ["meta-label"]
-	  }, ["Karma:   " + _vm._s(_vm.user.karma)]), (_vm.user.about) ? _h('text', {
+	  }, [_vm._v("Karma:   " + _vm._s(_vm.user.karma))]), (_vm.user.about) ? _c('text', {
 	    staticClass: ["meta-label", "user-about"]
-	  }, [_vm._s(_vm._f("unescape")(_vm.user.about))]) : _vm._e()]) : _h('div', {
+	  }, [_vm._v(_vm._s(_vm._f("unescape")(_vm.user.about)))]) : _vm._e()]) : _c('div', {
 	    staticClass: ["loading"]
-	  }, [_h('text', {
+	  }, [_c('text', {
 	    staticClass: ["loading-text"]
-	  }, ["loading ..."])])])])
+	  }, [_vm._v("loading ...")])])])], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
