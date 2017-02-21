@@ -1,7 +1,7 @@
 {
   "name": "weex-hackernews",
-  "version": "0.1.0",
-  "description": "Weex HackerNews App, powered by Vue 2.x.",
+  "version": "1.0.0",
+  "description": "Weex HackerNews App, powered by Vue.js.",
   "main": "index.js",
   "keywords": [
     "weex",
