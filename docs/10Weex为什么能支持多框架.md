@@ -1,4 +1,4 @@
-# Weex 为什么能支持多个前端框架
+ # Weex 为什么能支持多个前端框架
 
 ## Weex 现状
 
@@ -13,7 +13,7 @@
 + 旧版 `.we` 格式的语法 👎
 + Vanilla （直接使用 Native DOM API） 👎
 
-其中，建议使用 Vue 2.0 和 Rax，后两个可能会废弃，不建议使用。
+其中，建议使用 Vue 2.0 和 Rax，后两个可能会废弃，不建议使用。Weex V R
 
 ## Weex 和前端框架的关系
 
@@ -21,3 +21,14 @@
 
 
 ## Weex 的整体结构
+
+在 weexcof 的时候就有老外在 twitter 上发现了 weex ，rax，就比较好奇 weex 是怎么支持多个框架的。
+
+有人在 StackOverflow 上问 [React Native 有没有 Virtual-DOM](http://stackoverflow.com/questions/41804855/does-react-native-have-a-virtual-dom)，会不会也这样搞
+
+有老外好奇
+
+
+## 黑科技
+
+监听原生事件 androidback
