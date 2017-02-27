@@ -4,6 +4,14 @@
 
 A mobile app for [Hacker News](https://news.ycombinator.com/), which is powered by Weex and Vue.
 
+## Preview
+
+Use [Weex Playground App](https://weex.apache.org/playground.html) to scan the QR code below.
+
+![QR Code](./qrcode.jpg)
+
+> The string in this QR code is `http://whatever.cn?_wx_tpl=https://raw.githubusercontent.com/weexteam/weex-hackernews/master/ios/assets/index.js` .
+
 ## Compile
 
 Install the dependencies:

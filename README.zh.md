@@ -2,6 +2,14 @@
 
 首个使用 Weex 和 Vue 开发的 Hacker News 原生应用。
 
+## 预览
+
+用 [Weex Playground App](https://weex.apache.org/playground.html) 扫描下方二维码即可。
+
+![QR Code](./qrcode.jpg)
+
+> 二维码内容是 `http://whatever.cn?_wx_tpl=https://raw.githubusercontent.com/weexteam/weex-hackernews/master/ios/assets/index.js` ，确保你的手机能登上 github 。
+
 ## 编译项目文件
 
 安装依赖：
