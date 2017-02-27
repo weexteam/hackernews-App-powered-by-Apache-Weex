@@ -8,7 +8,7 @@
 
 ![QR Code](./qrcode.jpg)
 
-> 二维码内容是 `http://whatever.cn?_wx_tpl=https://raw.githubusercontent.com/weexteam/weex-hackernews/master/ios/assets/index.js` ，确保你的手机能登上 github 。
+> 二维码内容是 `http://whatever.cn?_wx_tpl=https://raw.githubusercontent.com/weexteam/weex-hackernews/master/ios/assets/index.js` ，确保你的手机能登上 GitHub 。
 
 ## 编译项目文件
 
@@ -52,8 +52,6 @@ npm run serve
 
 启动服务后会监听 1337 端口，访问 http://127.0.0.1:1337/index.html 即可在浏览器中预览页面。
 
- > 注： 当前 index.html 的例子中使用的是 Weex 内置的 web 渲染器渲染页面，还未使用 Vue。
-
 ### 启动 Android 项目
 
 首先应该安装 [Android Studio](https://developer.android.com/studio/index.html) 和必要的 Android SDK，配置好基本的开发环境。
@@ -72,4 +70,4 @@ pod install
 
 使用 Xcode 打开 `ios` 目录中的项目（`HackerNews.xcworkspace`），然后即可启动模拟器预览页面。
 
- > 注：如果想要在真机上查看效果，还需要配置开发者签名等信息。
+> 注：如果想要在真机上查看效果，还需要配置开发者签名等信息。

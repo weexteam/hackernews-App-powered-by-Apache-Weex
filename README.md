@@ -10,7 +10,7 @@ Use [Weex Playground App](https://weex.apache.org/playground.html) to scan the Q
 
 ![QR Code](./qrcode.jpg)
 
-> The string in this QR code is `http://whatever.cn?_wx_tpl=https://raw.githubusercontent.com/weexteam/weex-hackernews/master/ios/assets/index.js` .
+> The content of this QR code is `http://whatever.cn?_wx_tpl=https://raw.githubusercontent.com/weexteam/weex-hackernews/master/ios/assets/index.js` , please make sure your phone can assess GitHub.
 
 ## Compile
 
@@ -41,8 +41,6 @@ npm run serve
 
 The server is listening on 1337. Visit http://127.0.0.1:1337/index.html can preview the app on browser.
 
- > NOTE: Currently the vue renderer is not ready, the web page isn't rendering by Vue components.
-
 ### Run The Android Project
 
 First you should install [Android Studio](https://developer.android.com/studio/index.html) and Android SDK.
@@ -61,4 +59,4 @@ pod install
 
 Open the project in the `ios` folder by Xcode, you could run the app on the simulator.
 
- > NOTE: If you want to run the app on real device, you also need to setup your own signing configuration.
+> NOTE: If you want to run the app on real device, you also need to setup your own signing configuration.
