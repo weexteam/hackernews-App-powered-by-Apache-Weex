@@ -1,10 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
 
-var bannerPlugin = new webpack.BannerPlugin(
-  '// { "framework": "Vue" }\n',
-  { raw: true }
-)
+var bannerPlugin = new webpack.BannerPlugin({
+  banner: '// { "framework": "Vue" }\n',
+  raw: true
+})
 
 function getBaseConfig () {
   return {
@@ -15,10 +15,10 @@ function getBaseConfig () {
       path: 'dist',
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
-          loader: 'babel',
+          loader: 'babel-loader',
           exclude: /node_modules/
         }, {
           test: /\.vue(\?[^?]+)?$/,
@@ -26,16 +26,19 @@ function getBaseConfig () {
         }
       ]
     },
-    plugins: [bannerPlugin]
+    plugins: [
+      // new webpack.optimize.UglifyJsPlugin({compress: { warnings: false }}),
+      bannerPlugin
+    ]
   }
 }
 
 var webConfig = getBaseConfig()
 webConfig.output.filename = '[name].web.js'
-webConfig.module.loaders[1].loaders.push('vue')
+webConfig.module.rules[1].loaders.push('vue-loader')
 
-var weexConfig = getBaseConfig()
-weexConfig.output.filename = '[name].weex.js'
-weexConfig.module.loaders[1].loaders.push('weex')
+var nativeConfig = getBaseConfig()
+nativeConfig.output.filename = '[name].weex.js'
+nativeConfig.module.rules[1].loaders.push('weex-loader')
 
-module.exports = [webConfig, weexConfig]
+module.exports = [webConfig, nativeConfig]
