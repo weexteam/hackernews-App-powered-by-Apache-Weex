@@ -7,10 +7,11 @@ export function host (url) {
 }
 
 export function https (url) {
-  if (WXEnvironment.platform === 'iOS' && typeof url === 'string') {
+  const env = weex.config.env || WXEnvironment
+  if (env.platform === 'iOS' && typeof url === 'string') {
     return url.replace(/^http\:/, 'https:')
   }
-  return ''
+  return url
 }
 
 export function timeAgo (time) {
