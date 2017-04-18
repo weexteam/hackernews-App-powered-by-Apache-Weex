@@ -24,3 +24,5 @@ android/playground/app/gradlew
 android/playground/app/gradlew.bat
 android/playground/app/gradle/wrapper/gradle-wrapper.jar
 android/playground/app/gradle/wrapper/gradle-wrapper.properties
+
+docs
