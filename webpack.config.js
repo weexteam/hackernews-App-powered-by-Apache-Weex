@@ -21,8 +21,7 @@ function getBaseConfig () {
           loader: 'babel-loader',
           exclude: /node_modules/
         }, {
-          test: /\.vue(\?[^?]+)?$/,
-          loaders: []
+          test: /\.vue(\?[^?]+)?$/
         }
       ]
     },
@@ -35,10 +34,24 @@ function getBaseConfig () {
 
 var webConfig = getBaseConfig()
 webConfig.output.filename = '[name].web.js'
-webConfig.module.rules[1].loaders.push('vue-loader')
+webConfig.module.rules[1].loader = 'vue-loader'
+/**
+ * important! should use postTransformNode to add $processStyle for
+ * inline style normalization.
+ */
+webConfig.module.rules[1].options = {
+  compilerModules: [
+    {
+      postTransformNode: el => {
+        el.staticStyle = `$processStyle(${el.staticStyle})`
+        el.styleBinding = `$processStyle(${el.styleBinding})`
+      }
+    }
+  ]
+}
 
 var nativeConfig = getBaseConfig()
 nativeConfig.output.filename = '[name].weex.js'
-nativeConfig.module.rules[1].loaders.push('weex-loader')
+nativeConfig.module.rules[1].loader = 'weex-loader'
 
 module.exports = [webConfig, nativeConfig]
