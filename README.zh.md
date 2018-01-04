@@ -6,6 +6,8 @@
 
 用 [Weex Playground App](https://weex.apache.org/playground.html) 扫描下方二维码即可。
 
+> **项目使用的 [Hacker News API](https://github.com/HackerNews/API) 是由 Google 的 [Firebase](https://firebase.google.com/) 提供的网络服务，在国内网络环境里访问可能会受到一些影响。**
+
 ![QR Code](./qrcode.jpg)
 
 > 二维码内容是 `http://whatever.cn?_wx_tpl=https://raw.githubusercontent.com/weexteam/weex-hackernews/master/ios/assets/index.js` ，确保你的手机能登上 GitHub 。
